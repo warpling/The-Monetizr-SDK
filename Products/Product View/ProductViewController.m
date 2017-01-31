@@ -309,7 +309,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		[self.navigationController setNavigationBarHidden:NO];
 	}
 	
-	if (self.URLForSharing) {
+	if (self.URLForSharing && (!self.navigationItem.rightBarButtonItems || self.navigationItem.rightBarButtonItems.count < 1)) {
 		UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLink)];
 		NSArray *rightButtons = [@[rightButton] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
 		self.navigationItem.rightBarButtonItems = rightButtons;
