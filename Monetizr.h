@@ -1,7 +1,6 @@
 //
 //  Monetizr.h
-//  m2048
-//
+//  v1.1.0
 //  Created by Armands Avotins on 09/05/16.
 //  Copyright © 2016 TheMonetizr. All rights reserved.
 //
@@ -9,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Buy/Buy.h>
 #import <sys/utsname.h>
+#import <AFNetworking/AFNetworking.h>
 // @import UIKit;
 
 #import "ProductListViewController.h"
@@ -39,5 +39,6 @@
 @property (nonatomic, assign) BOOL presentViewController;
 
 + (void) showProductWithID: (NSString *) productID;
++ (void) showProductForTag: (NSString *) productTag forUser: (NSString *) userID;
 
 @end

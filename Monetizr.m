@@ -1,18 +1,51 @@
 //
 //  Monetizr.m
-//  m2048
-//
+//  v1.1.0
 //  Created by Armands Avotins on 09/05/16.
 //  Copyright © 2016 TheMonetizr. All rights reserved.
 //
 
-#define SHOP_DOMAIN @"instagramprinted.myshopify.com"
-#define API_KEY @"e8a3223e639a4234e8ac25477307cbb8"
-#define APP_ID @"8"
-
 #import "Monetizr.h"
 
 @implementation Monetizr
+
++ (void) showProductForTag: (NSString *) productTag forUser: (NSString *) userID {
+    // Start networking
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Monetizr" ofType:@"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSString *apiKey = [dict valueForKey:@"apiKey"];
+    NSString *apiUrl = [dict valueForKey:@"apiUrl"];
+    //NSDictionary *parameters = @{@"apikey": apiKey, @"tag": productTag, @"userID": userID};
+    NSString *urlString = [NSString stringWithFormat:@"https://%@/get-tag?apiKey=%@&tag=%@&user_id=%@", apiUrl, apiKey, productTag, userID];
+    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        // Success
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            // Valid response
+            if (responseObject[@"is_active"]) {
+                // Response have key active
+                if ([[responseObject valueForKey:@"is_active"] boolValue]) {
+                    // Tag is active
+                    if (responseObject[@"product_id"]) {
+                        // Got product ID
+                        if (![[responseObject valueForKey:@"product_id"] isKindOfClass:[NSNull class]]) {
+                            NSString *productID = [responseObject valueForKey:@"product_id"];
+                            [self showProductWithID:productID];
+                        }
+                    }
+                }
+            }
+        }
+
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        // Failure
+        NSLog(@"Error: %@", error);
+        //NSString* htmlString = [[NSString alloc] initWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+
+    }];
+}
 
 + (void) showProductWithID: (NSString *) productID {
     // Read Monetizr properties
@@ -151,5 +184,7 @@
     
     return deviceName;
 }
+
+// Post statistics
 
 @end

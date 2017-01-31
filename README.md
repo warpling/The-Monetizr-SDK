@@ -1,5 +1,5 @@
-[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](todo)
-[![GitHub release](https://img.shields.io/badge/build-1.0.0-blue.svg)](https://github.com/Shopify/mobile-buy-sdk-ios/releases)
+[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)]()
+[![GitHub release](https://img.shields.io/badge/release-1.1.0-blue.svg)] ()
 
 # TheMonetizr SDK for iOS
 TheMonetizr SDK makes it simple to sell physical products inside your mobile app. With a few lines of code, you can let your users buy products using Apple Pay or their credit card.
@@ -11,6 +11,8 @@ Official documentation can be found on the [TheMonetizr website](http://themonet
 
 ### Installation
 [Install Shopify’s Mobile Buy SDK](https://github.com/Shopify/mobile-buy-sdk-ios#installation)
+
+[Install AFNetworking 3.x](https://github.com/AFNetworking/AFNetworking#installation)
 
 <a href="https://github.com/themonetizr/The-Monetizr-SDK">Download TheMonetizr</a>
 
@@ -31,6 +33,7 @@ Find setup instructions on [Apple developer website](https://developer.apple.com
 
 ```objc
 @{
+    @"apiUrl": @"", // Provided by TheMonetizr
     @"applePayMerchantId": @"", // Optional
     @"appId": @"", // Provided by TheMonetizr
     @"shopDomain": @"", // Provided by TheMonetizr
@@ -38,10 +41,16 @@ Find setup instructions on [Apple developer website](https://developer.apple.com
 };
 ```
 
-* To open product view
+* To open product view using Product ID
 
 ```objc
 [Monetizr showProductWithID:@"Provided product ID"]
+```
+
+* To open product view using Product TAG and pass user ID for statistics
+
+```objc
+[Monetizr showProductForTag:@"TAG" forUser:@"User ID"]
 ```
 
 ### Help
