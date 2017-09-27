@@ -40,5 +40,6 @@
 
 + (void) showProductWithID: (NSString *) productID;
 + (void) showProductForTag: (NSString *) productTag forUser: (NSString *) userID;
++ (void) showProductForTag: (NSString *) productTag;
 
 @end
