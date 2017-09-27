@@ -8,6 +8,43 @@
 #import "Monetizr.h"
 
 @implementation Monetizr
+ 
++ (void) showProductForTag: (NSString *) productTag {
+    // Start networking
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Monetizr" ofType:@"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSString *apiKey = [dict valueForKey:@"apiKey"];
+    NSString *apiUrl = [dict valueForKey:@"apiUrl"];
+    NSString *urlString = [NSString stringWithFormat:@"https://%@/get-tag?apiKey=%@&tag=%@", apiUrl, apiKey, productTag];
+    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        // Success
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            // Valid response
+            if (responseObject[@"is_active"]) {
+                // Response have key active
+                if ([[responseObject valueForKey:@"is_active"] boolValue]) {
+                    // Tag is active
+                    if (responseObject[@"product_id"]) {
+                        // Got product ID
+                        if (![[responseObject valueForKey:@"product_id"] isKindOfClass:[NSNull class]]) {
+                            NSString *productID = [responseObject valueForKey:@"product_id"];
+                            [self showProductWithID:productID];
+                        }
+                    }
+                }
+            }
+        }
+        
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        // Failure
+        NSLog(@"Error: %@", error);
+        //NSString* htmlString = [[NSString alloc] initWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        
+    }];
+}
 
 + (void) showProductForTag: (NSString *) productTag forUser: (NSString *) userID {
     // Start networking
