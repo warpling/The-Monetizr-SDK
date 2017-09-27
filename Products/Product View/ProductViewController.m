@@ -353,7 +353,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
     [_productView.productViewFooter setApplePayAvailable:self.shouldShowApplePaySetup requiresSetup:self.shouldShowApplePaySetup];
     [_productView.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 
-    self.navigationItem.title = _product.title;
+    //self.navigationItem.title = _product.title;
     [self setupNavigationBarAppearance];
 }
 
