@@ -50,7 +50,7 @@ Find setup instructions on [Apple developer website](https://developer.apple.com
 * To open product view using Product TAG and pass user ID for statistics
 
 ```objc
-[Monetizr showProductForTag:@"TAG" forUser:@"User ID"]
+[Monetizr showProductForTag:@"TAG"]
 ```
 
 ### Help
