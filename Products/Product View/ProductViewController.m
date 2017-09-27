@@ -187,7 +187,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	if (self.navigationBar == nil && _productView && self.presentingViewController != nil) {
 		[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:NO duration:0];
 		for (UIView *view in [self.navigationController.navigationBar subviews]) {
-			if (CGRectGetHeight(view.bounds) >= 44) {
+			if (CGRectGetHeight(view.bounds) > 44) {
 				// Get a reference to the UINavigationBar
 				self.navigationBar = view;
 				self.navigationBar.alpha = 0;
