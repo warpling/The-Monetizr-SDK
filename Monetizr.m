@@ -1,7 +1,8 @@
 //
 //  Monetizr.m
-//  v1.1.0
+//  v1.2.0
 //  Created by Armands Avotins on 09/05/16.
+//  Updated by Armands Avotins on 28/09/17.
 //  Copyright © 2016 TheMonetizr. All rights reserved.
 //
 
@@ -10,6 +11,9 @@
 @implementation Monetizr
  
 + (void) showProductForTag: (NSString *) productTag {
+    
+    [self addLoadingView];
+    
     // Start networking
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -21,6 +25,7 @@
     NSString *urlString = [NSString stringWithFormat:@"https://%@/get-tag?apiKey=%@&tag=%@", apiUrl, apiKey, productTag];
     [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         // Success
+        [self removeLoadingView];
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             // Valid response
             if (responseObject[@"is_active"]) {
@@ -41,12 +46,15 @@
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         // Failure
         NSLog(@"Error: %@", error);
-        //NSString* htmlString = [[NSString alloc] initWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        [self removeLoadingView];
         
     }];
 }
 
 + (void) showProductForTag: (NSString *) productTag forUser: (NSString *) userID {
+    
+    [self addLoadingView];
+    
     // Start networking
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -55,10 +63,10 @@
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
     NSString *apiKey = [dict valueForKey:@"apiKey"];
     NSString *apiUrl = [dict valueForKey:@"apiUrl"];
-    //NSDictionary *parameters = @{@"apikey": apiKey, @"tag": productTag, @"userID": userID};
     NSString *urlString = [NSString stringWithFormat:@"https://%@/get-tag?apiKey=%@&tag=%@&user_id=%@", apiUrl, apiKey, productTag, userID];
     [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         // Success
+        [self removeLoadingView];
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             // Valid response
             if (responseObject[@"is_active"]) {
@@ -79,12 +87,14 @@
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         // Failure
         NSLog(@"Error: %@", error);
-        //NSString* htmlString = [[NSString alloc] initWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
-
+        [self removeLoadingView];
     }];
 }
 
 + (void) showProductWithID: (NSString *) productID {
+    
+    [self addLoadingView];
+    
     // Read Monetizr properties
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Monetizr" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
@@ -92,7 +102,6 @@
     NSString *apiKey = [dict valueForKey:@"apiKey"];
     NSString *appId = [dict valueForKey:@"appId"];
     NSString *applePayMerchantId = [dict valueForKey:@"applePayMerchantId"];
-
 
     BUYClient *client = [[BUYClient alloc] initWithShopDomain:shopDomain apiKey:apiKey appId:appId];
 
@@ -109,6 +118,7 @@
     [client getProductById:productIDNumber completion:^(BUYProduct *product, NSError *error) {
         if (error) {
             NSLog(@"Error retrieving product: %@", error.userInfo);
+            [self removeLoadingView];
         } else {
             ProductViewController *productViewController = [[ProductViewController alloc] initWithClient:client theme:theme];
 
@@ -118,9 +128,8 @@
             //[productViewController loadWithProduct:product completion:NULL];
 
             [productViewController loadWithProduct:product forDevice:deviceName completion:NULL];
-
-
-
+            
+            [self removeLoadingView];
             UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
             while (topRootViewController.presentedViewController)
             {
@@ -220,6 +229,45 @@
     }
     
     return deviceName;
+}
+
++ (UIView*) loadingView {
+    // Create overlay
+    UIView* loadingView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                0,
+                                                                [UIScreen mainScreen].bounds.size.width,
+                                                                [UIScreen mainScreen].bounds.size.height)];
+    [loadingView setBackgroundColor:[UIColor blackColor]];
+    loadingView.userInteractionEnabled = YES;
+    loadingView.alpha = 0.7;
+    
+    // Create loding indicator
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    activityView.center=loadingView.center;
+    [activityView startAnimating];
+    [loadingView addSubview:activityView];
+    
+    // Return view
+    return loadingView;
+}
+
++ (void) addLoadingView {
+    // Add laoding view
+    UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIView *loadingView = [self loadingView];
+    loadingView.tag = 521657;
+    [topRootViewController.view addSubview:loadingView];
+}
+
++ (void) removeLoadingView {
+    UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    for (UIView *view in [topRootViewController.view subviews]) {
+        if (view.tag == 521657) {
+            [view removeFromSuperview];
+        }
+    }
 }
 
 // Post statistics

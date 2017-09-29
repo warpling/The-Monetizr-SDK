@@ -1,7 +1,8 @@
 //
 //  Monetizr.h
-//  v1.1.0
+//  v1.2.0
 //  Created by Armands Avotins on 09/05/16.
+//  Updated by Armands Avotins on 28/09/17.
 //  Copyright © 2016 TheMonetizr. All rights reserved.
 //
 
@@ -18,7 +19,6 @@
 #import "ProductViewControllerToggleTableViewCell.h"
 #import "ProductViewControllerThemeStyleTableViewCell.h"
 #import "ProductViewControllerThemeTintColorTableViewCell.h"
-
 
 //#import "BUYTheme.h"
 //#import "BUYProductViewController.h"
