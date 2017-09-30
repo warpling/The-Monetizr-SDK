@@ -1,4 +1,5 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)]()
+
 [![GitHub release](https://img.shields.io/badge/release-1.2.0-blue.svg)] ()
 
 # TheMonetizr SDK for iOS
