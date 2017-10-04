@@ -72,7 +72,7 @@
 
 - (BOOL)shouldShowApplePaySetup
 {
-	return self.applePayPaymentProvider.available == YES && [self canShowApplePaySetup];
+	return self.applePayPaymentProvider.available == NO && [self canShowApplePaySetup];
 }
 
 #pragma mark - Payment
