@@ -345,11 +345,13 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
         [_productView.productViewFooter.actionButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
         [_productView.productViewFooter.actionButton addTarget:self action:@selector(checkoutWithShopify) forControlEvents:UIControlEventTouchUpInside];
     }
-    
     _productView.productViewHeader.collectionView.delegate = self;
     _productView.productViewHeader.collectionView.dataSource = self;
     
-    _productView.layoutMargins = UIEdgeInsetsMake(self.productView.layoutMargins.top, self.productView.layoutMargins.left, self.bottomLayoutGuide.length, self.productView.layoutMargins.right);
+    int bottom = self.bottomLayoutGuide.length;
+    bottom = bottom-bottom-bottom;
+    
+    _productView.layoutMargins = UIEdgeInsetsMake(self.productView.layoutMargins.top, self.productView.layoutMargins.left, bottom, self.productView.layoutMargins.right);
     [_productView.productViewFooter setApplePayAvailable:self.shouldShowApplePayButton requiresSetup:self.shouldShowApplePaySetup];
     [_productView.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 
