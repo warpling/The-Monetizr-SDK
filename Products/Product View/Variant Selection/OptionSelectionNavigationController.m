@@ -44,18 +44,6 @@
 		self.view.layer.cornerRadius = 4.0;
 		self.view.clipsToBounds = YES;
 		
-		// Add custom back button
-		UIImage *buttonImage = [[ImageKit imageOfVariantBackImageWithFrame:CGRectMake(0, 0, 12, 18)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-		if ([[UIBarButtonItem class] respondsToSelector:@selector(appearanceWhenContainedInInstancesOfClasses:)]) {
-			[[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[NavigationController class]]] setBackButtonBackgroundImage:[buttonImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 0)]
-																																  forState:UIControlStateNormal
-																																barMetrics:UIBarMetricsDefault];
-		} else {
-			[[UIBarButtonItem appearanceWhenContainedIn:[NavigationController class], nil] setBackButtonBackgroundImage:[buttonImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 0)]
-																												  forState:UIControlStateNormal
-																												barMetrics:UIBarMetricsDefault];
-		}
-		
 		_breadsCrumbsView = [OptionBreadCrumbsView new];
 		_breadsCrumbsView.translatesAutoresizingMaskIntoConstraints = NO;
 		[self.view addSubview:_breadsCrumbsView];
