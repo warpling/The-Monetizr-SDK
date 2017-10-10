@@ -276,7 +276,7 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
 	[super setBackgroundColor:backgroundColor];
-	_stickyFooterView.backgroundColor = backgroundColor;
+    _stickyFooterView.backgroundColor = backgroundColor;
 }
 
 - (void)setShowsProductImageBackground:(BOOL)showsProductImageBackground

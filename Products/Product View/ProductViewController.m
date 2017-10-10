@@ -185,7 +185,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 - (void)setupNavigationBarAppearance
 {
 	if (self.navigationBar == nil && _productView && self.presentingViewController != nil) {
-		[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:NO duration:0];
+		[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:YES duration:0];
 		for (UIView *view in [self.navigationController.navigationBar subviews]) {
 			if (CGRectGetHeight(view.bounds) >= 44) {
 				// Get a reference to the UINavigationBar
@@ -472,7 +472,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 									 completion:NULL];
 				} else if (self.navigationBar.alpha != 0 && [self navigationBarThresholdReached] == NO)  {
 					duration = 0.2f;
-					[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:NO duration:duration];
+					[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:YES duration:duration];
 					[UIView animateWithDuration:duration
 										  delay:0
 										options:(UIViewAnimationOptionCurveLinear | UIViewKeyframeAnimationOptionBeginFromCurrentState)
