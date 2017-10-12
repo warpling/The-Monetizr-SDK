@@ -166,6 +166,13 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	[self.navigationController setNavigationBarHidden:(self.presentingViewController && self.isLoading)];
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // Set Voice Over focus to the summary element
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.headerCell);
+}
+
 - (void)viewDidLayoutSubviews
 {
 	[super viewDidLayoutSubviews];
