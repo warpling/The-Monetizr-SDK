@@ -102,7 +102,6 @@
             }
 
             [topRootViewController presentViewController:productViewController animated:YES completion:nil];
-
         }
     }];
 }
@@ -230,19 +229,19 @@
     loadingView.alpha = 0.7;
     
     // Create loding indicator
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc]
                                              initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
-    activityView.center=loadingView.center;
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
+    activityIndicatorView.center = loadingView.center;
+    [activityIndicatorView startAnimating];
+    [loadingView addSubview:activityIndicatorView];
     
     // Return view
     return loadingView;
 }
 
 + (void) addLoadingView {
-    // Add laoding view
+    // Add loading view
     UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     UIView *loadingView = [self loadingView];
     loadingView.tag = 521657;
@@ -257,7 +256,5 @@
         }
     }
 }
-
-// Post statistics
 
 @end

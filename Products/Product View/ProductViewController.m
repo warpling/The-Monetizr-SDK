@@ -230,6 +230,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	} else {
 		if (self.shop == nil) {
 			[self getShopWithCallback:^(BOOL success, NSError *error) {
+                [self.activityIndicatorView stopAnimating];
 				if (completion) {
 					completion(success, error);
 				}
@@ -237,6 +238,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		} else {
 			self.product = product;
 			dispatch_async(dispatch_get_main_queue(), ^{
+                [self.activityIndicatorView stopAnimating];
 				if (completion) {
 					completion(YES, nil);
 				}
@@ -266,6 +268,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
             [self getShopWithCallback:^(BOOL success, NSError *error) {
                 self.selectedVariant = variantIndex;
                 self.product = product;
+                [self.activityIndicatorView stopAnimating];
                 if (completion) {
                     completion(success, error);
                 }
@@ -274,6 +277,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
             self.selectedVariant = variantIndex;
             self.product = product;
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.activityIndicatorView stopAnimating];
                 if (completion) {
                     completion(YES, nil);
                 }
@@ -296,7 +300,8 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 				[self.delegate controllerFailedToStartApplePayProcess:self];
 			}
 		}
-		
+
+        [self.activityIndicatorView stopAnimating];
 		if (block) block((error == nil), error);
 	}];
 }
