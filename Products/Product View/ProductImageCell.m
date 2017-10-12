@@ -43,6 +43,7 @@
 		_productImageView.translatesAutoresizingMaskIntoConstraints = NO;
 		_productImageView.backgroundColor = [UIColor clearColor];
 		_productImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _productImageView.accessibilityTraits = UIAccessibilityTraitImage;
 		[self.contentView addSubview:_productImageView];
 		
 		[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_productImageView]|"
