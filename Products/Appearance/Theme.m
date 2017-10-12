@@ -51,8 +51,9 @@
 	self = [super init];
 	
 	if (self) {
-		self.style = ThemeStyleLight;
-		self.showsProductImageBackground = YES;
+        self.style = ThemeStyleDark;
+        self.tintColor = [UIColor rotationPrimary];
+        self.showsProductImageBackground = YES;
 	}
 	
 	return self;
