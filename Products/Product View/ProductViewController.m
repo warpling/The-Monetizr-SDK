@@ -309,7 +309,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		[self.navigationController setNavigationBarHidden:NO];
 	}
 	
-	if (self.URLForSharing && (!self.navigationItem.rightBarButtonItems || self.navigationItem.rightBarButtonItems.count < 1)) {
+	if (self.theme.showsProductShareButton && self.URLForSharing && (!self.navigationItem.rightBarButtonItems || self.navigationItem.rightBarButtonItems.count < 1)) {
 		UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLink)];
 		NSArray *rightButtons = [@[rightButton] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
 		self.navigationItem.rightBarButtonItems = rightButtons;
@@ -626,11 +626,15 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 
 - (NSURL *)URLForSharing
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/products/%@",self.shop.domain, self.product.handle];
-	return [NSURL URLWithString:urlString];
+    if (self.shop.domain && self.product.handle) {
+        NSString *urlString = [NSString stringWithFormat:@"%@/products/%@", self.shop.domain, self.product.handle];
+        return [NSURL URLWithString:urlString];
+    }
+
+    return nil;
 }
 
-- (UIImage *)ImageForSharing
+- (UIImage *)imageForSharing
 {
 	UICollectionView *collectionView = self.productView.productViewHeader.collectionView;
 	NSIndexPath *selectedIndex = collectionView.indexPathsForVisibleItems.firstObject;

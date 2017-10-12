@@ -48,14 +48,17 @@
 
 - (instancetype)init
 {
-	self = [super init];
-	
-	if (self) {
-		self.style = ThemeStyleLight;
-		self.showsProductImageBackground = YES;
-	}
-	
-	return self;
+
+    self = [super init];
+
+    if (self) {
+        self.style = ThemeStyleDark;
+        self.tintColor = [UIColor rotationPrimary];
+        self.showsProductImageBackground = YES;
+        self.showsProductShareButton = NO;
+    }
+
+    return self;
 }
 
 - (void)styleProductViewController
