@@ -38,6 +38,8 @@
 	UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[closeButton addTarget:self action:@selector(dismissPopover) forControlEvents:UIControlEventTouchUpInside];
 	closeButton.frame = CGRectMake(0, 0, 22, 22);
+    closeButton.accessibilityValue = NSLocalizedString(@"close", @"VoiceOver label for close button");
+
 	UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
 	self.topViewController.navigationItem.leftBarButtonItem = barButtonItem;
 	if ([[UINavigationBar class] respondsToSelector:@selector(appearanceWhenContainedInInstancesOfClasses:)]) {
@@ -103,6 +105,12 @@
 		return self.viewControllers[0];
 	}
 	return self.visibleViewController;
+}
+
+#pragma mark - Accessibility
+- (BOOL) accessibilityPerformEscape {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    return YES;
 }
 
 @end

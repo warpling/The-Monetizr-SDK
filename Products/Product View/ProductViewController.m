@@ -561,11 +561,13 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	return self.productView.tableView.contentOffset.y > CGRectGetHeight(self.productView.productViewHeader.bounds) - CGRectGetHeight(self.navigationBar.bounds);
 }
 
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
 	return UIInterfaceOrientationPortrait;
 }
 
-- (BOOL)shouldAutorotate {
+- (BOOL)shouldAutorotate
+{
 	return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 }
 
@@ -667,5 +669,11 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		[self.delegate controller:self failedToCreateCheckout:error];
 	}
 }
+
+#pragma mark - Accessibility
+
+//- (BOOL) accessibilityPerformEscape {
+//    self
+//}
 
 @end
