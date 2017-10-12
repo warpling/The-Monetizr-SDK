@@ -42,11 +42,6 @@
 	return [UIColor colorWithWhite:0.4f alpha:1];
 }
 
-+ (UIColor*)descriptionTextColor
-{
-	return [UIColor colorWithWhite:0.4f alpha:1];
-}
-
 + (UIColor*)variantPriceTextColor
 {
 	return BUY_RGB(140, 140, 140);
