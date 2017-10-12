@@ -60,6 +60,7 @@
 		_collectionView.pagingEnabled = YES;
 		_collectionView.clipsToBounds = NO;
 		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+        _collectionView.accessibilityLabel = NSLocalizedString(@"product images", @"VoiceOver label for product image carousel");
 		[_collectionView registerClass:[ProductImageCell class] forCellWithReuseIdentifier:@"Cell"];
 		[self addSubview:_collectionView];
 		

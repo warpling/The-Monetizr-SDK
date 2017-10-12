@@ -109,6 +109,9 @@
 																	 attribute:NSLayoutAttributeCenterY
 																	multiplier:1.0f
 																	  constant:0.0f]];
+
+        self.accessibilityTraits |= UIAccessibilityTraitButton;
+        self.accessibilityHint = NSLocalizedString(@"tap to select", @"VoiceOver hint for product option cell");
 		
 	}
 	return self;
