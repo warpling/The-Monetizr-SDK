@@ -62,6 +62,7 @@
 		_priceLabel.font = [Theme productPriceFont];
 		_priceLabel.translatesAutoresizingMaskIntoConstraints = NO;
 		_priceLabel.textAlignment = NSTextAlignmentRight;
+        _priceLabel.accessibilityLabel = NSLocalizedString(@"Current price", @"VoiceOver label for current price displayed on product view");
 		[_priceLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 		[_priceLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 		[priceView addSubview:_priceLabel];
@@ -71,6 +72,8 @@
 		_comparePriceLabel.textAlignment = NSTextAlignmentRight;
 		_comparePriceLabel.font = [Theme productComparePriceFont];
 		_comparePriceLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _comparePriceLabel.accessibilityLabel = NSLocalizedString(@"Compare to price", @"VoiceOver label for compare-to price displayed on product view");
+
 		[_comparePriceLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 		[_comparePriceLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 		[priceView addSubview:_comparePriceLabel];
@@ -105,7 +108,7 @@
 	if (productVariant.availableValue == YES && productVariant.compareAtPrice) {
 		NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:[currencyFormatter stringFromNumber:productVariant.compareAtPrice]
 																			   attributes:@{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)}];
-		self.comparePriceLabel.attributedText = attributedString;
+        self.comparePriceLabel.attributedText = attributedString;
 		self.comparePriceLabel.textColor = [Theme comparePriceTextColor];
 	} else if (productVariant.available == NO) {
 		self.comparePriceLabel.text = NSLocalizedString(@"Sold Out", @"Sold out text displayed on product view");
@@ -116,6 +119,7 @@
 	
 	[self setNeedsLayout];
 	[self layoutIfNeeded];
+    [self updateAccessibilityAttributes];
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
@@ -133,6 +137,33 @@
 - (void)setProductTitleColor:(UIColor*)color
 {
 	self.titleLabel.textColor = color;
+}
+
+#pragma mark - Accessibility
+
+- (void)updateAccessibilityAttributes
+{
+    self.isAccessibilityElement = YES;
+
+    NSString *accessibilityValue = self.titleLabel.text;
+
+    if (self.priceLabel.text) {
+        NSString *priceAccessibilityDescription = [NSString stringWithFormat:@"%@: %@",
+                                              self.priceLabel.accessibilityLabel,
+                                              self.priceLabel.text];
+        accessibilityValue = [accessibilityValue stringByAppendingString:[NSString stringWithFormat:@", %@", priceAccessibilityDescription]];
+    }
+
+    if (self.comparePriceLabel.text) {
+        NSString *comparePriceAccessibilityDescription = [NSString stringWithFormat:@"%@: %@",
+                                                          self.comparePriceLabel.accessibilityLabel,
+                                                          self.comparePriceLabel.text];
+        accessibilityValue = [accessibilityValue stringByAppendingString:[NSString stringWithFormat:@", %@", comparePriceAccessibilityDescription]];
+    }
+
+    self.accessibilityTraits = UIAccessibilityTraitSummaryElement;
+    self.accessibilityLabel = NSLocalizedString(@"Product", @"VoiceOver label for product name and prices");
+    self.accessibilityValue = accessibilityValue;
 }
 
 @end
