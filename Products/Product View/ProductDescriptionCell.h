@@ -32,6 +32,11 @@
 @interface ProductDescriptionCell : UITableViewCell
 
 /**
+ *  The text color of the product's description
+ */
+@property (nonatomic) UIColor *descriptionTextColor UI_APPEARANCE_SELECTOR;
+
+/**
  *  Converts the product description from HTML to an attributed string
  *
  *  @param html The product's description
