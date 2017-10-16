@@ -37,12 +37,12 @@
 @property (nonatomic, assign) BOOL presentViewController;
 
 + (void) showProductWithID:(NSString *)productID;
-+ (void) showProductWithID:(NSString *)productID completion:(void (^)())completion;
++ (void) showProductWithID:(NSString *)productID completion:(void (^)(BOOL success, NSError *error))completion;
 
 + (void) showProductForTag: (NSString *)productTag forUser:(NSString *)userID;
-+ (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID completion:(void (^)())completion;
++ (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID completion:(void (^)(BOOL success, NSError *error))completion;
 
 + (void) showProductForTag:(NSString *)productTag;
-+ (void) showProductForTag:(NSString *)productTag completion:(void (^)())completion;
++ (void) showProductForTag:(NSString *)productTag completion:(void (^)(BOOL success, NSError *error))completion;
 
 @end

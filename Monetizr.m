@@ -12,7 +12,7 @@
     [self showProductForTag:productTag completion:nil];
 }
 
-+ (void) showProductForTag:(NSString *)productTag completion:(void (^)())completion {
++ (void) showProductForTag:(NSString *)productTag completion:(void (^)(BOOL success, NSError *error))completion {
     
     [self addLoadingView];
     
@@ -57,7 +57,7 @@
     [self showProductForTag:productTag forUser:userID completion:nil];
 }
 
-+ (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID completion:(void (^)())completion {
++ (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID completion:(void (^)(BOOL success, NSError *error))completion {
     
     [self addLoadingView];
     
@@ -94,6 +94,7 @@
         // Failure
         NSLog(@"Error: %@", error);
         [self removeLoadingView];
+        completion(NO, error);
     }];
 }
 
@@ -101,7 +102,7 @@
     [self showProductWithID:productID completion:nil];
 }
 
-+ (void) showProductWithID:(NSString *)productID completion:(void (^)())completion {
++ (void) showProductWithID:(NSString *)productID completion:(void (^)(BOOL success, NSError *error))completion {
     
     [self addLoadingView];
     
@@ -129,6 +130,7 @@
         if (error) {
             NSLog(@"Error retrieving product: %@", error.userInfo);
             [self removeLoadingView];
+            completion(NO, error);
         } else {
             ProductViewController *productViewController = [[ProductViewController alloc] initWithClient:client theme:theme];
 
@@ -142,7 +144,9 @@
                 topRootViewController = topRootViewController.presentedViewController;
             }
 
-            [topRootViewController presentViewController:productViewController animated:YES completion:completion];
+            [topRootViewController presentViewController:productViewController animated:YES completion:^{
+                completion(YES, nil);
+            }];
         }
     }];
 }
