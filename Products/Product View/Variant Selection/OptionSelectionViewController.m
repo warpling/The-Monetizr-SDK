@@ -89,7 +89,9 @@
 {
 	BUYOptionValue *optionValue = self.optionValues[indexPath.row];
 	OptionValueCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	cell.selectedImageView.hidden = ![optionValue isEqual:self.selectedOptionValue];
+    BOOL isSelected = [optionValue isEqual:self.selectedOptionValue];
+	cell.selectedImageView.hidden = !isSelected;
+    cell.accessibilityTraits = isSelected ? UIAccessibilityTraitSelected : UIAccessibilityTraitNone;
 	if (self.isLastOption) {
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		BUYProductVariant *productVariant = (BUYProductVariant*)self.filteredProductVariantsForSelectionOption[indexPath.row];

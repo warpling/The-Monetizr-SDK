@@ -166,6 +166,13 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	[self.navigationController setNavigationBarHidden:(self.presentingViewController && self.isLoading)];
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // Set Voice Over focus to the summary element
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.headerCell);
+}
+
 - (void)viewDidLayoutSubviews
 {
 	[super viewDidLayoutSubviews];
@@ -223,6 +230,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	} else {
 		if (self.shop == nil) {
 			[self getShopWithCallback:^(BOOL success, NSError *error) {
+                [self.activityIndicatorView stopAnimating];
 				if (completion) {
 					completion(success, error);
 				}
@@ -230,6 +238,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		} else {
 			self.product = product;
 			dispatch_async(dispatch_get_main_queue(), ^{
+                [self.activityIndicatorView stopAnimating];
 				if (completion) {
 					completion(YES, nil);
 				}
@@ -259,6 +268,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
             [self getShopWithCallback:^(BOOL success, NSError *error) {
                 self.selectedVariant = variantIndex;
                 self.product = product;
+                [self.activityIndicatorView stopAnimating];
                 if (completion) {
                     completion(success, error);
                 }
@@ -267,6 +277,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
             self.selectedVariant = variantIndex;
             self.product = product;
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.activityIndicatorView stopAnimating];
                 if (completion) {
                     completion(YES, nil);
                 }
@@ -289,7 +300,8 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 				[self.delegate controllerFailedToStartApplePayProcess:self];
 			}
 		}
-		
+
+        [self.activityIndicatorView stopAnimating];
 		if (block) block((error == nil), error);
 	}];
 }
@@ -309,8 +321,9 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		[self.navigationController setNavigationBarHidden:NO];
 	}
 	
-	if (self.URLForSharing && (!self.navigationItem.rightBarButtonItems || self.navigationItem.rightBarButtonItems.count < 1)) {
+	if (self.theme.showsProductShareButton && self.URLForSharing && (!self.navigationItem.rightBarButtonItems || self.navigationItem.rightBarButtonItems.count < 1)) {
 		UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLink)];
+        rightButton.accessibilityValue = NSLocalizedString(@"share", @"VoiceOver value for share button");
 		NSArray *rightButtons = [@[rightButton] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
 		self.navigationItem.rightBarButtonItems = rightButtons;
 	}
@@ -561,11 +574,13 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	return self.productView.tableView.contentOffset.y > CGRectGetHeight(self.productView.productViewHeader.bounds) - CGRectGetHeight(self.navigationBar.bounds);
 }
 
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
 	return UIInterfaceOrientationPortrait;
 }
 
-- (BOOL)shouldAutorotate {
+- (BOOL)shouldAutorotate
+{
 	return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 }
 
@@ -626,11 +641,15 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 
 - (NSURL *)URLForSharing
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/products/%@",self.shop.domain, self.product.handle];
-	return [NSURL URLWithString:urlString];
+    if (self.shop.domain && self.product.handle) {
+        NSString *urlString = [NSString stringWithFormat:@"%@/products/%@", self.shop.domain, self.product.handle];
+        return [NSURL URLWithString:urlString];
+    }
+
+    return nil;
 }
 
-- (UIImage *)ImageForSharing
+- (UIImage *)imageForSharing
 {
 	UICollectionView *collectionView = self.productView.productViewHeader.collectionView;
 	NSIndexPath *selectedIndex = collectionView.indexPathsForVisibleItems.firstObject;
@@ -663,5 +682,11 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		[self.delegate controller:self failedToCreateCheckout:error];
 	}
 }
+
+#pragma mark - Accessibility
+
+//- (BOOL) accessibilityPerformEscape {
+//    self
+//}
 
 @end
