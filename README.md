@@ -46,13 +46,22 @@ Find setup instructions on [Apple developer website](https://developer.apple.com
 ```objc
 [Monetizr showProductWithID:@"Provided product ID"]
 ```
+* To open product view using Product ID and get callback
+
+```objc
+[Monetizr showProductWithID:@"11645793606" completion:^(BOOL success, NSError *error)]
+```
 
 * To open product view using Product TAG
 
 ```objc
 [Monetizr showProductForTag:@"TAG"]
 ```
+* To open product view using Product TAG and get callback
 
+```objc
+[Monetizr showProductForTag:@"TAG" completion:^(BOOL success, NSError *error)]
+```
 ### Help
 
 For help, please contact [TheMonetizr](http://themonetizr.com).
