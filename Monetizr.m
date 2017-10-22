@@ -12,13 +12,15 @@
     [self showProductForTag:productTag forUser:nil completion:nil];
 }
 
++ (void) showProductForTag:(NSString *)productTag completion:(void (^)(BOOL, NSError *))completion {
+    [self showProductForTag:productTag forUser:nil completion:nil];
+}
+
 + (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID {
     [self showProductForTag:productTag forUser:userID completion:nil];
 }
 
 + (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID completion:(void (^)(BOOL success, NSError *error))completion {
-    
-    [self addLoadingView];
     
     // Start networking
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -35,7 +37,6 @@
 
     [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         // Success
-        [self removeLoadingView];
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             // Valid response
             if (responseObject[@"is_active"]) {
@@ -56,7 +57,6 @@
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         // Failure
         NSLog(@"Error: %@", error);
-        [self removeLoadingView];
         completion(NO, error);
     }];
 }
@@ -66,8 +66,6 @@
 }
 
 + (void) showProductWithID:(NSString *)productID completion:(void (^)(BOOL success, NSError *error))completion {
-    
-    [self addLoadingView];
     
     // Read Monetizr properties
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Monetizr" ofType:@"plist"];
@@ -92,7 +90,6 @@
     [client getProductById:productIDNumber completion:^(BUYProduct *product, NSError *error) {
         if (error) {
             NSLog(@"Error retrieving product: %@", error.userInfo);
-            [self removeLoadingView];
             completion(NO, error);
         } else {
             ProductViewController *productViewController = [[ProductViewController alloc] initWithClient:client theme:theme];
@@ -100,7 +97,6 @@
             [productViewController setMerchantId:applePayMerchantId];
             [productViewController loadWithProduct:product forDevice:deviceName completion:NULL];
             
-            [self removeLoadingView];
             UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
             while (topRootViewController.presentedViewController)
             {
@@ -223,45 +219,6 @@
     }
     
     return deviceName;
-}
-
-+ (UIView*) loadingView {
-    // Create overlay
-    UIView* loadingView = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                   0,
-                                                                   [UIScreen mainScreen].bounds.size.width,
-                                                                   [UIScreen mainScreen].bounds.size.height)];
-    [loadingView setBackgroundColor:[UIColor blackColor]];
-    loadingView.userInteractionEnabled = YES;
-    loadingView.alpha = 0.7;
-    
-    // Create loding indicator
-    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc]
-                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    
-    activityIndicatorView.center = loadingView.center;
-    [activityIndicatorView startAnimating];
-    [loadingView addSubview:activityIndicatorView];
-    
-    // Return view
-    return loadingView;
-}
-
-+ (void) addLoadingView {
-    // Add loading view
-    UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    UIView *loadingView = [self loadingView];
-    loadingView.tag = 521657;
-    [topRootViewController.view addSubview:loadingView];
-}
-
-+ (void) removeLoadingView {
-    UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    for (UIView *view in [topRootViewController.view subviews]) {
-        if (view.tag == 521657) {
-            [view removeFromSuperview];
-        }
-    }
 }
 
 @end
