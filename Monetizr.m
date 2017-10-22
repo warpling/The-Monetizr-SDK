@@ -78,6 +78,9 @@
     BUYClient *client = [[BUYClient alloc] initWithShopDomain:shopDomain apiKey:apiKey appId:appId];
 
     Theme *theme = [Theme new];
+    
+    //theme.style = ThemeStyleDark;
+    
     theme.showsProductImageBackground = YES;
 
     // Determine product variant to choose by default
