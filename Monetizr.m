@@ -7,12 +7,16 @@
 #import "Monetizr.h"
 
 @implementation Monetizr
- 
-+ (void) showProductForTag: (NSString *) productTag {
-    [self showProductForTag:productTag forUser:nil];
+
++ (void) showProductForTag:(NSString *)productTag {
+    [self showProductForTag:productTag forUser:nil completion:nil];
 }
 
-+ (void) showProductForTag: (NSString *) productTag forUser: (NSString *) userID {
++ (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID {
+    [self showProductForTag:productTag forUser:userID completion:nil];
+}
+
++ (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID completion:(void (^)(BOOL success, NSError *error))completion {
     
     [self addLoadingView];
     
@@ -42,7 +46,7 @@
                         // Got product ID
                         if (![[responseObject valueForKey:@"product_id"] isKindOfClass:[NSNull class]]) {
                             NSString *productID = [responseObject valueForKey:@"product_id"];
-                            [self showProductWithID:productID];
+                            [self showProductWithID:productID completion:completion];
                         }
                     }
                 }
@@ -53,10 +57,15 @@
         // Failure
         NSLog(@"Error: %@", error);
         [self removeLoadingView];
+        completion(NO, error);
     }];
 }
 
-+ (void) showProductWithID: (NSString *) productID {
++ (void) showProductWithID:(NSString *)productID {
+    [self showProductWithID:productID completion:nil];
+}
+
++ (void) showProductWithID:(NSString *)productID completion:(void (^)(BOOL success, NSError *error))completion {
     
     [self addLoadingView];
     
@@ -84,14 +93,11 @@
         if (error) {
             NSLog(@"Error retrieving product: %@", error.userInfo);
             [self removeLoadingView];
+            completion(NO, error);
         } else {
             ProductViewController *productViewController = [[ProductViewController alloc] initWithClient:client theme:theme];
 
             [productViewController setMerchantId:applePayMerchantId];
-
-            //[productViewController allowApplePaySetup];
-            //[productViewController loadWithProduct:product completion:NULL];
-
             [productViewController loadWithProduct:product forDevice:deviceName completion:NULL];
             
             [self removeLoadingView];
@@ -100,8 +106,9 @@
             {
                 topRootViewController = topRootViewController.presentedViewController;
             }
-
-            [topRootViewController presentViewController:productViewController animated:YES completion:nil];
+            [topRootViewController presentViewController:productViewController animated:YES completion:^{
+                completion(YES, nil);
+            }];
         }
     }];
 }
@@ -221,9 +228,9 @@
 + (UIView*) loadingView {
     // Create overlay
     UIView* loadingView = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                0,
-                                                                [UIScreen mainScreen].bounds.size.width,
-                                                                [UIScreen mainScreen].bounds.size.height)];
+                                                                   0,
+                                                                   [UIScreen mainScreen].bounds.size.width,
+                                                                   [UIScreen mainScreen].bounds.size.height)];
     [loadingView setBackgroundColor:[UIColor blackColor]];
     loadingView.userInteractionEnabled = YES;
     loadingView.alpha = 0.7;
