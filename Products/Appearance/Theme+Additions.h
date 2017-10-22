@@ -45,13 +45,6 @@
 + (UIColor*)comparePriceTextColor;
 
 /**
- *  The color for the product's description text
- *
- *  @return The color appropriate for the ThemeStyle
- */
-+ (UIColor*)descriptionTextColor;
-
-/**
  *  The color for the variant price text
  *
  *  @return The color appropriate for the ThemeStyle
