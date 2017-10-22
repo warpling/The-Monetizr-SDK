@@ -131,7 +131,7 @@
 		_pageControl = [[UIPageControl alloc] init];
 		_pageControl.hidesForSinglePage = YES;
 		_pageControl.translatesAutoresizingMaskIntoConstraints = NO;
-		_pageControl.userInteractionEnabled = NO;
+        [_pageControl addTarget:self action:@selector(pageChanged:) forControlEvents:UIControlEventValueChanged];
 		[_bottomGradientView addSubview:_pageControl];
 		
 		[_bottomGradientView addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
@@ -177,6 +177,11 @@
 		self.bottomGradientViewLayoutConstraintHeight.constant = kBuyBottomGradientHeightWithPageControl;
 		self.bottomGradientView.bottomColor = [UIColor colorWithWhite:0 alpha:0.15f];
 	}
+}
+
+- (void)pageChanged:(id)sender {
+    UIPageControl *pageControl = (UIPageControl*)sender;
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:pageControl.currentPage inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 }
 
 - (void)setCurrentPage:(NSInteger)currentPage
