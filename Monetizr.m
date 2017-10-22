@@ -13,7 +13,7 @@
 }
 
 + (void) showProductForTag:(NSString *)productTag completion:(void (^)(BOOL, NSError *))completion {
-    [self showProductForTag:productTag forUser:nil completion:nil];
+    [self showProductForTag:productTag forUser:nil completion:(void (^)(BOOL, NSError *))completion];
 }
 
 + (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID {
