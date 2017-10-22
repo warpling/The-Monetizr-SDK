@@ -68,6 +68,10 @@
                                                                                               options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,  NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
                                                                                    documentAttributes:nil
                                                                                                 error:nil];
+        
+        NSRange originalRange = NSMakeRange(0, attributedString.length);
+        [attributedString setAttributes:@{} range:originalRange];
+        
         self.descriptionLabel.attributedText = attributedString;
     }
     else {
