@@ -78,6 +78,20 @@
 	[self.tableView reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    // Announce what this picker is for to VoiceOver users
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.title);
+
+    // Set VoiceOver focus to the currently selected cell or first item if none is selected
+    NSUInteger currentRow = [self.optionValues indexOfObject:self.selectedOptionValue];
+    currentRow = currentRow != NSNotFound ? currentRow : 0;
+    NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:currentRow inSection:0];
+    OptionValueCell *currentCell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
+    UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, currentCell);
+}
+
 #pragma mark - Table View methods
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
