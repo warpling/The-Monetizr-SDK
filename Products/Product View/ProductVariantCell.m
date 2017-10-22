@@ -91,6 +91,9 @@ CGFloat const buttonWidth = 10.0f;
 																	  attribute:NSLayoutAttributeCenterY
 																	 multiplier:1.0f
 																	   constant:0.0f]];
+
+        self.accessibilityTraits |= UIAccessibilityTraitButton;
+        self.accessibilityHint = NSLocalizedString(@"tap to change", @"VoiceOver hint for product variant cell");
 	}
 
 	return self;

@@ -7,50 +7,9 @@
 #import "Monetizr.h"
 
 @implementation Monetizr
- 
-+ (void) showProductForTag:(NSString *)productTag {
-    [self showProductForTag:productTag completion:nil];
-}
 
-+ (void) showProductForTag:(NSString *)productTag completion:(void (^)(BOOL success, NSError *error))completion {
-    
-    [self addLoadingView];
-    
-    // Start networking
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Monetizr" ofType:@"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSString *apiKey = [dict valueForKey:@"apiKey"];
-    NSString *apiUrl = [dict valueForKey:@"apiUrl"];
-    NSString *urlString = [NSString stringWithFormat:@"https://%@/get-tag?apiKey=%@&tag=%@", apiUrl, apiKey, productTag];
-    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        // Success
-        [self removeLoadingView];
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            // Valid response
-            if (responseObject[@"is_active"]) {
-                // Response have key active
-                if ([[responseObject valueForKey:@"is_active"] boolValue]) {
-                    // Tag is active
-                    if (responseObject[@"product_id"]) {
-                        // Got product ID
-                        if (![[responseObject valueForKey:@"product_id"] isKindOfClass:[NSNull class]]) {
-                            NSString *productID = [responseObject valueForKey:@"product_id"];
-                            [self showProductWithID:productID completion:completion];
-                        }
-                    }
-                }
-            }
-        }
-        
-    } failure:^(NSURLSessionTask *operation, NSError *error) {
-        // Failure
-        NSLog(@"Error: %@", error);
-        [self removeLoadingView];
-        
-    }];
++ (void) showProductForTag:(NSString *)productTag {
+    [self showProductForTag:productTag forUser:nil completion:nil];
 }
 
 + (void) showProductForTag:(NSString *)productTag forUser:(NSString *)userID {
@@ -69,7 +28,11 @@
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
     NSString *apiKey = [dict valueForKey:@"apiKey"];
     NSString *apiUrl = [dict valueForKey:@"apiUrl"];
-    NSString *urlString = [NSString stringWithFormat:@"https://%@/get-tag?apiKey=%@&tag=%@&user_id=%@", apiUrl, apiKey, productTag, userID];
+    NSString *urlString = [NSString stringWithFormat:@"https://%@/get-tag?apiKey=%@&tag=%@", apiUrl, apiKey, productTag];
+    if (userID) {
+        urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"&user_id=%@", userID]];
+    }
+
     [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         // Success
         [self removeLoadingView];
@@ -119,7 +82,7 @@
     Theme *theme = [Theme new];
     theme.showsProductImageBackground = YES;
 
-    // Determ product variant to choose by default
+    // Determine product variant to choose by default
     NSString *deviceName = [Monetizr deviceName];
 
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
@@ -143,7 +106,6 @@
             {
                 topRootViewController = topRootViewController.presentedViewController;
             }
-
             [topRootViewController presentViewController:productViewController animated:YES completion:^{
                 completion(YES, nil);
             }];
@@ -274,19 +236,19 @@
     loadingView.alpha = 0.7;
     
     // Create loding indicator
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc]
                                              initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
-    activityView.center=loadingView.center;
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
+    activityIndicatorView.center = loadingView.center;
+    [activityIndicatorView startAnimating];
+    [loadingView addSubview:activityIndicatorView];
     
     // Return view
     return loadingView;
 }
 
 + (void) addLoadingView {
-    // Add laoding view
+    // Add loading view
     UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     UIView *loadingView = [self loadingView];
     loadingView.tag = 521657;
@@ -301,7 +263,5 @@
         }
     }
 }
-
-// Post statistics
 
 @end

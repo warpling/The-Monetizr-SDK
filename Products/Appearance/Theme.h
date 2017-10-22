@@ -61,6 +61,12 @@ typedef NS_ENUM(NSInteger, ThemeStyle) {
  */
 @property (nonatomic, assign) BOOL showsProductImageBackground;
 
+/**
+ *  Determines whether a share button is shown for a product. Default is YES
+ */
+@property (nonatomic, assign) BOOL showsProductShareButton;
+
+
 - (void)styleProductViewController;
 
 @end

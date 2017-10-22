@@ -125,4 +125,11 @@
 	}
 }
 
+#pragma mark - Accessibility
+
+- (BOOL) accessibilityPerformEscape {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    return YES;
+}
+
 @end

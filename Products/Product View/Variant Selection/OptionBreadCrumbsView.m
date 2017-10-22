@@ -49,6 +49,7 @@
 		_optionOneLabel.translatesAutoresizingMaskIntoConstraints = NO;
 		_optionOneLabel.font = [Theme variantBreadcrumbsFont];
 		_optionOneLabel.text = NSLocalizedString(@"Selected: ", @"Prefix for selected option value in variant selector");
+        _optionOneLabel.isAccessibilityElement = NO;
 		[self addSubview:_optionOneLabel];
 		
 		_optionTwoLabel = [UILabel new];

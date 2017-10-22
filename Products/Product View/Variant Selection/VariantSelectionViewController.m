@@ -67,6 +67,7 @@
 	// Add close button
 	UIImage *closeButton = [[ImageKit imageOfVariantCloseImageWithFrame:CGRectMake(0, 0, 18, 20)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 	UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:closeButton style:UIBarButtonItemStylePlain target:self action:@selector(dismissPopover)];
+    barButtonItem.accessibilityValue = NSLocalizedString(@"close", @"VoiceOver label for close button");
 	controller.navigationItem.leftBarButtonItem = barButtonItem;
 	[self.navigationController pushViewController:controller animated:NO];
 	
