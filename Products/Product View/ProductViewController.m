@@ -355,7 +355,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
         [_productView.productViewFooter.actionButton addTarget:self action:@selector(addSelectedVariantToCart) forControlEvents:UIControlEventTouchUpInside];
     }
     else {
-        [_productView.productViewFooter.actionButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
+        [_productView.productViewFooter.actionButton setTitle:NSLocalizedString(@"Credit Card", nil) forState:UIControlStateNormal];
         [_productView.productViewFooter.actionButton addTarget:self action:@selector(checkoutWithShopify) forControlEvents:UIControlEventTouchUpInside];
     }
     _productView.productViewHeader.collectionView.delegate = self;
