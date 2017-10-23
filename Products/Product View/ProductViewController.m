@@ -608,6 +608,10 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	return UIStatusBarAnimationFade;
 }
 
+- (BOOL) prefersStatusBarHidden {
+    return self.theme.prefersStatusBarsHidden;
+}
+
 - (BOOL)navigationBarThresholdReached
 {
 	return self.productView.tableView.contentOffset.y > CGRectGetHeight(self.productView.productViewHeader.bounds) - CGRectGetHeight(self.navigationBar.bounds);

@@ -54,9 +54,15 @@
         self.style = ThemeStyleDark;
         self.tintColor = [UIColor rotationPrimary];
         self.showsProductImageBackground = YES;
+        self.hidesStatusBar = !(UIAccessibilityIsVoiceOverRunning() || UIAccessibilityIsSwitchControlRunning());
 	}
 	
 	return self;
+}
+
+// Kind of hacky but allows for run-time changes
+- (BOOL) prefersStatusBarsHidden {
+    return !(UIAccessibilityIsVoiceOverRunning() || UIAccessibilityIsSwitchControlRunning());
 }
 
 - (void)styleProductViewController
