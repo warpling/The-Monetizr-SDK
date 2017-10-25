@@ -534,6 +534,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 
 	} else {
 		[[[PKPassLibrary alloc] init] openPaymentSetup];
+        [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 	}
 }
 
