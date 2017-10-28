@@ -61,6 +61,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 @property (nonatomic, strong) BUYProductVariant *selectedProductVariant;
 @property (nonatomic, assign) NSUInteger selectedVariant;
 @property (nonatomic, strong) Theme *theme;
+@property (nonatomic, assign) BOOL hidesStatusBar;
 @property (nonatomic, assign) BOOL shouldShowVariantSelector;
 @property (nonatomic, assign) BOOL shouldEnableVariantSelection;
 @property (nonatomic, assign) BOOL shouldShowDescription;
@@ -90,7 +91,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 {
 	self = [super initWithClient:client];
 	if (self) {
-		
 		self.modalPresentationStyle = UIModalPresentationCustom;
 		self.transitioningDelegate = self;
 		
@@ -129,6 +129,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		if (theme == nil) {
 			theme = [Theme new];
 		}
+        self.hidesStatusBar = theme.hidesStatusBar;
 		[theme styleProductViewController];
 	}
 	return self;
@@ -553,6 +554,11 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 }
 
 #pragma mark UIStatusBar appearance
+
+-(BOOL)prefersStatusBarHidden{
+    BOOL prefersStatusBarHidden = self.hidesStatusBar;
+    return prefersStatusBarHidden;
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {

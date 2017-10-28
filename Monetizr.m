@@ -76,10 +76,12 @@
     NSString *applePayMerchantId = [dict valueForKey:@"applePayMerchantId"];
 
     BUYClient *client = [[BUYClient alloc] initWithShopDomain:shopDomain apiKey:apiKey appId:appId];
-
+    
+    // Configure theme
     Theme *theme = [Theme new];
     
-    //theme.style = ThemeStyleDark;
+    // theme.style = ThemeStyleDark;
+    // theme.hidesStatusBar = YES;
     
     theme.showsProductImageBackground = YES;
 

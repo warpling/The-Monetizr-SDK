@@ -66,6 +66,11 @@ typedef NS_ENUM(NSInteger, ThemeStyle) {
  */
 @property (nonatomic, assign) BOOL showsProductShareButton;
 
+/**
+ *  Determines whether a status bar is shown for a product view. Default is NO
+ */
+@property (nonatomic, assign) BOOL hidesStatusBar;
+
 
 - (void)styleProductViewController;
 
