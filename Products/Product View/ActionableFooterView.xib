@@ -23,11 +23,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjm-5z-kCD" userLabel="paymentContainer">
-                                <rect key="frame" x="10" y="46" width="145" height="44"/>
+                                <rect key="frame" x="165" y="46" width="145" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoe-n5-0iT" customClass="CheckoutButton">
-                                <rect key="frame" x="165" y="46" width="145" height="44"/>
+                                <rect key="frame" x="10" y="46" width="145" height="44"/>
                                 <color key="backgroundColor" red="0.079406969249248505" green="0.6425163745880127" blue="0.99822807312011719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Yod-FN-PBJ"/>
@@ -45,12 +45,12 @@
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="height" secondItem="Eoe-n5-0iT" secondAttribute="height" id="DoE-w1-naR"/>
                             <constraint firstItem="QbM-Nc-TSH" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" id="Q7m-41-SnI"/>
                             <constraint firstItem="QbM-Nc-TSH" firstAttribute="top" secondItem="tOf-FE-2kG" secondAttribute="topMargin" id="Tbz-Z9-Xyu"/>
-                            <constraint firstItem="jjm-5z-kCD" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" constant="10" id="VhS-Ee-6XT"/>
+                            <constraint firstItem="jjm-5z-kCD" firstAttribute="leading" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="10" id="TrN-mK-JxT"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Eoe-n5-0iT" secondAttribute="bottom" id="WHF-0k-ScU"/>
-                            <constraint firstAttribute="trailing" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="10" id="Ylh-XA-837"/>
+                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" constant="10" id="dZr-Hj-aFE"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="width" secondItem="Eoe-n5-0iT" secondAttribute="width" id="fop-kv-C9D"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="centerY" secondItem="Eoe-n5-0iT" secondAttribute="centerY" id="g86-Vu-ZpD"/>
-                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="leading" secondItem="jjm-5z-kCD" secondAttribute="trailing" constant="10" id="gKj-bN-Py3"/>
+                            <constraint firstAttribute="trailing" secondItem="jjm-5z-kCD" secondAttribute="trailing" constant="10" id="gAH-5J-cUr"/>
                             <constraint firstItem="Eoe-n5-0iT" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" id="pwX-zC-1fR"/>
                             <constraint firstAttribute="trailing" secondItem="QbM-Nc-TSH" secondAttribute="trailing" id="yYy-IX-gUN"/>
                         </constraints>
