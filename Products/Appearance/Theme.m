@@ -95,6 +95,8 @@
         [[UIScrollView appearanceWhenContainedInInstancesOfClasses:@[[NavigationController class]]] setIndicatorStyle:scrollViewIndicatorStyle];
         [[UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[[ProductViewController class]]] setColor:primaryColor];
     } else {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         [[UINavigationBar appearanceWhenContainedIn:[OptionSelectionNavigationController class], nil] setTitleTextAttributes:@{ NSForegroundColorAttributeName : navigationBarTitleVariantSelectionColor }];
         [[UINavigationBar appearanceWhenContainedIn:[NavigationController class], nil] setTitleTextAttributes:@{ NSForegroundColorAttributeName : navigationBarTitleColor }];
         [[UINavigationBar appearanceWhenContainedIn:[NavigationController class], nil] setTintColor:primaryColor];
@@ -103,6 +105,7 @@
         [[UITableView appearanceWhenContainedIn:[NavigationController class], nil] setSeparatorColor:secondaryMediumColor];
         [[UIScrollView appearanceWhenContainedIn:[NavigationController class], nil] setIndicatorStyle:scrollViewIndicatorStyle];
         [[UIActivityIndicatorView appearanceWhenContainedIn:[ProductViewController class], nil] setColor:primaryColor];
+        #pragma clang diagnostic pop
     }
 	
     [[ProductView appearance] setTintColor:primaryColor];
