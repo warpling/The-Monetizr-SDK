@@ -168,13 +168,18 @@
 
 - (void)paymentProvider:(id<BUYPaymentProvider>)provider didFailCheckoutWithError:(NSError *)error
 {
-	if ([self.delegate respondsToSelector:@selector(controller:failedToCreateCheckout:)]) {
+   // [self showAlertWithTitle:@"" andMessage:@"Pay checkout was not possible. Please use a different payment method."];
+    if ([self.delegate respondsToSelector:@selector(controller:failedToCreateCheckout:)]) {
 		[self.delegate controller:self failedToCreateCheckout:error];
 	}
 }
 
 - (void)paymentProvider:(id<BUYPaymentProvider>)provider didCompleteCheckout:(BUYCheckout *)checkout withStatus:(BUYStatus)status
 {
+    if (status != BUYStatusFailed ) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 	if ([self.delegate respondsToSelector:@selector(controller:didCompleteCheckout:status:)]) {
 		[self.delegate controller:self didCompleteCheckout:checkout status:status];
 	}
@@ -187,12 +192,32 @@
 
 - (void)paymentProviderWantsControllerDismissed:(id<BUYPaymentProvider>)provider
 {
-	[self dismissViewControllerAnimated:YES completion:nil];
+	// [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(PKPaymentRequest *)paymentRequest
 {
 	return nil;
+}
+
+#pragma mark
+
+- (void) showAlertWithTitle: (NSString *) title andMessage: (NSString *)message {
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:title
+                                 message:message
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:@"Close"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   //Handle your yes please button action here
+                               }];
+    
+    [alert addAction:okButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
