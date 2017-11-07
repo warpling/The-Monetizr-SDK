@@ -27,6 +27,7 @@
 @import UIKit;
 #import "CheckoutButton.h"
 #import "UIButton+PaymentButton.h"
+#import "ProductVariantView.h"
 
 @interface ActionableFooterView : UIView
 
@@ -45,9 +46,12 @@
  *  A view which sits above the buttons.
  *  Can be used to add a description or other content to the footer.
  */
-@property (nonatomic, readonly) UIView *extensionView;
+@property (nonatomic, readonly)  UIView *extensionView;
 
 @property (nonatomic) PaymentButtonStyle paymentButtonStyle UI_APPEARANCE_SELECTOR;
 @property (nonatomic) UIColor *separatorColor UI_APPEARANCE_SELECTOR;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *extensionViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *extensionViewTop;
 
 @end

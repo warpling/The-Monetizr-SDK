@@ -61,6 +61,16 @@
 #pragma mark - Padding and Sizes
 
 /**
+ *  0 pt padding
+ */
+extern CGFloat const kBuyPaddingNone;
+
+/**
+ *  4 pt padding
+ */
+extern CGFloat const kBuyPaddingVerySmall;
+
+/**
  *  8 pt padding
  */
 extern CGFloat const kBuyPaddingSmall;

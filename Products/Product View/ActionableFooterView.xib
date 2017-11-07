@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,21 +13,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ActionableFooterView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2he-LW-1Mz">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" id="tOf-FE-2kG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjm-5z-kCD" userLabel="paymentContainer">
-                                <rect key="frame" x="165" y="46" width="145" height="44"/>
+                                <rect key="frame" x="165" y="66" width="145" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoe-n5-0iT" customClass="CheckoutButton">
-                                <rect key="frame" x="10" y="46" width="145" height="44"/>
+                                <rect key="frame" x="10" y="66" width="145" height="44"/>
                                 <color key="backgroundColor" red="0.079406969249248505" green="0.6425163745880127" blue="0.99822807312011719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Yod-FN-PBJ"/>
@@ -37,22 +37,24 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbM-Nc-TSH">
-                                <rect key="frame" x="0.0" y="10" width="320" height="36"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="10" y="8" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5eq-CM-bjl"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="height" secondItem="Eoe-n5-0iT" secondAttribute="height" id="DoE-w1-naR"/>
-                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" id="Q7m-41-SnI"/>
-                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="top" secondItem="tOf-FE-2kG" secondAttribute="topMargin" id="Tbz-Z9-Xyu"/>
+                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" constant="10" id="Q7m-41-SnI"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="leading" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="10" id="TrN-mK-JxT"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Eoe-n5-0iT" secondAttribute="bottom" id="WHF-0k-ScU"/>
                             <constraint firstItem="Eoe-n5-0iT" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" constant="10" id="dZr-Hj-aFE"/>
+                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="top" secondItem="tOf-FE-2kG" secondAttribute="top" constant="8" id="eHa-VV-dTJ"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="width" secondItem="Eoe-n5-0iT" secondAttribute="width" id="fop-kv-C9D"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="centerY" secondItem="Eoe-n5-0iT" secondAttribute="centerY" id="g86-Vu-ZpD"/>
                             <constraint firstAttribute="trailing" secondItem="jjm-5z-kCD" secondAttribute="trailing" constant="10" id="gAH-5J-cUr"/>
-                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" id="pwX-zC-1fR"/>
-                            <constraint firstAttribute="trailing" secondItem="QbM-Nc-TSH" secondAttribute="trailing" id="yYy-IX-gUN"/>
+                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" constant="8" id="pwX-zC-1fR"/>
+                            <constraint firstAttribute="trailing" secondItem="QbM-Nc-TSH" secondAttribute="trailing" constant="10" id="yYy-IX-gUN"/>
                         </constraints>
                     </view>
                     <blurEffect style="extraLight"/>
@@ -67,13 +69,15 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
+            <edgeInsets key="layoutMargins" top="5" left="10" bottom="10" right="10"/>
             <connections>
                 <outlet property="actionButton" destination="Eoe-n5-0iT" id="slV-do-iC5"/>
                 <outlet property="extensionView" destination="QbM-Nc-TSH" id="1rQ-Kd-AvH"/>
+                <outlet property="extensionViewHeight" destination="5eq-CM-bjl" id="LQN-Bq-2HW"/>
+                <outlet property="extensionViewTop" destination="eHa-VV-dTJ" id="Tcn-K7-rzX"/>
                 <outlet property="paymentButtonContainer" destination="jjm-5z-kCD" id="tgu-5h-QO3"/>
             </connections>
-            <point key="canvasLocation" x="142" y="525"/>
+            <point key="canvasLocation" x="149" y="512"/>
         </view>
     </objects>
 </document>

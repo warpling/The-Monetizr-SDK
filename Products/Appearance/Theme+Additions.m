@@ -54,6 +54,8 @@
 
 #pragma mark - Padding and Sizes
 
+CGFloat const kBuyPaddingNone = 0.0f;
+CGFloat const kBuyPaddingVerySmall = 4.0f;
 CGFloat const kBuyPaddingSmall = 8.0f;
 CGFloat const kBuyPaddingMedium = 12.0f;
 CGFloat const kBuyPaddingLarge = 14.0f;

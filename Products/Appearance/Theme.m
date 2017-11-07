@@ -31,7 +31,6 @@
 #import "OptionValueCell.h"
 #import "ProductDescriptionCell.h"
 #import "ProductHeaderCell.h"
-#import "ProductVariantCell.h"
 #import "OptionBreadCrumbsView.h"
 #import "HeaderOverlayView.h"
 #import "ProductViewNavigationController.h"
@@ -43,6 +42,7 @@
 #import "VisualEffectView.h"
 #import "UIColor+Additions.h"
 #import "CheckoutButton.h"
+#import "ProductVariantView.h"
 
 @implementation Theme
 
@@ -111,8 +111,7 @@
     [[ProductHeaderCell appearance] setBackgroundColor:contentBackgroundColor];
     [[ProductDescriptionCell appearance] setDescriptionTextColor:contentTextColor];
     [[ProductDescriptionCell appearance] setBackgroundColor:contentBackgroundColor];
-    [[ProductVariantCell appearance] setBackgroundColor:contentBackgroundColor];
-    [[ProductVariantCell appearance] setSelectedBackgroundViewBackgroundColor:contentBackgroundSelectedColor];
+    [[ProductVariantView appearance] setBackgroundColor:contentBackgroundColor];
     [[VariantOptionView appearance] setBackgroundColor:contentBackgroundColor];
     [[OptionValueCell appearance] setTintColor:primaryColor];
     [[OptionValueCell appearance] setBackgroundColor:contentBackgroundColor];

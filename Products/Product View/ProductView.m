@@ -29,7 +29,7 @@
 #import "HeaderBackgroundView.h"
 #import "ActionableFooterView.h"
 #import "GradientView.h"
-#import "ProductVariantCell.h"
+#import "ProductVariantView.h"
 #import "ProductDescriptionCell.h"
 #import "ProductHeaderCell.h"
 #import "AsyncImageView.h"
@@ -108,7 +108,6 @@
 		[self addSubview:_tableView];
 		
 		[_tableView registerClass:[ProductHeaderCell class] forCellReuseIdentifier:@"headerCell"];
-		[_tableView registerClass:[ProductVariantCell class] forCellReuseIdentifier:@"variantCell"];
 		[_tableView registerClass:[ProductDescriptionCell class] forCellReuseIdentifier:@"descriptionCell"];
 		
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|"
@@ -137,7 +136,7 @@
 			_tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1)];
 		}
 		
-		_productViewFooter = [ActionableFooterView new];
+		_productViewFooter = [ActionableFooterView new];        
 		_productViewFooter.translatesAutoresizingMaskIntoConstraints = NO;
 		[self addSubview:_productViewFooter];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_productViewFooter]|"

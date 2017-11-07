@@ -1,9 +1,10 @@
 //
-//  ProductVariantCell.h
-//  Mobile Buy SDK
+//  ProductVariantView.h
 //
-//  Created by Shopify.
-//  Copyright (c) 2015 Shopify Inc. All rights reserved.
+//  Monetizr SDK
+//
+//  Created by Monetizr.
+//  Copyright (c) 2017 Monetizr Inc. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +25,28 @@
 //  THE SOFTWARE.
 //
 
+//#import <UIKit/UIKit.h>
 @import UIKit;
 @import Buy;
 
-/**
- *  Table view cell containing the product's variant options
- */
-@interface ProductVariantCell : UITableViewCell
+#import "DisclosureIndicatorView.h"
+#import "ImageKit.h"
+#import "Theme+Additions.h"
+#import "VariantOptionView.h"
+
+@interface ProductVariantView : UIView
+
+@property (nonatomic, strong) VariantOptionView *optionView1;
+@property (nonatomic, strong) VariantOptionView *optionView2;
+@property (nonatomic, strong) VariantOptionView *optionView3;
+@property (nonatomic, strong) NSArray *constraints;
+@property (nonatomic, strong) DisclosureIndicatorView *disclosureIndicatorImageView;
 
 /**
  *  Set the options for a product variant
  *
  *  @param productVariant The selected product variant
  */
-- (void)setOptionsForProductVariant:(BUYProductVariant *)productVariant;
-
-- (void)setSelectedBackgroundViewBackgroundColor:(UIColor *)selectedBackgroundViewBackgroundColor UI_APPEARANCE_SELECTOR;
+- (void)setOptionsForProductVariant:(BUYProductVariant *)productVariant hideDisclosureIndicator:(BOOL)hide;
 
 @end

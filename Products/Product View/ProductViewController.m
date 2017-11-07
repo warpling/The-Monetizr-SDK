@@ -33,7 +33,6 @@
 #import "ImageKit.h"
 #import "ProductView.h"
 #import "ProductHeaderCell.h"
-#import "ProductVariantCell.h"
 #import "ProductDescriptionCell.h"
 #import "ProductViewHeader.h"
 #import "ProductImageCell.h"
@@ -74,7 +73,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 @property (nonatomic, weak) UIView *navigationBar;
 @property (nonatomic, weak) UILabel *navigationBarTitle;
 @property (nonatomic, strong) ProductHeaderCell *headerCell;
-@property (nonatomic, strong) ProductVariantCell *variantCell;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 // Share items
@@ -314,8 +312,8 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	//self.selectedProductVariant = [_product.variants firstObject];
     NSUInteger variantIndex = _selectedVariant;
     self.selectedProductVariant = [_product.variants objectAtIndex:variantIndex];
-	self.shouldShowVariantSelector = [_product isDefaultVariant] == NO;
-	self.shouldEnableVariantSelection = self.shouldShowVariantSelector && [_product.variants count] > 1;
+    self.shouldShowVariantSelector = [_product isDefaultVariant] == NO;
+    self.shouldEnableVariantSelection = self.shouldShowVariantSelector && [_product.variants count] > 1;
 	self.shouldShowDescription = ([_product.htmlDescription length] == 0) == NO;
 	[self setNeedsStatusBarAppearanceUpdate];
 	if (self.presentingViewController) {
@@ -351,6 +349,27 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
     [_productView.productViewFooter setApplePayAvailable:self.shouldShowApplePayButton requiresSetup:self.shouldShowApplePaySetup];
     [_productView.productViewFooter.paymentButton addTarget:self action:@selector(checkoutWithApplePay) forControlEvents:UIControlEventTouchUpInside];
     
+    // Setup variant view
+    
+    if (self.shouldShowVariantSelector) {
+        ProductVariantView *variantView = [[ProductVariantView alloc] initWithFrame:CGRectMake(0, 0, self.preferredContentSize.width-20, 50)];
+        if (self.shouldEnableVariantSelection) {
+            [variantView setOptionsForProductVariant:self.selectedProductVariant hideDisclosureIndicator:NO];
+            UITapGestureRecognizer *variantSelectorFingerTap =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(openVariantSelector)];
+            [_productView.productViewFooter.extensionView addGestureRecognizer:variantSelectorFingerTap];
+        }
+        if (!self.shouldEnableVariantSelection) {
+            [variantView setOptionsForProductVariant:self.selectedProductVariant hideDisclosureIndicator:NO];
+        }
+        [_productView.productViewFooter.extensionView addSubview:variantView];
+    }
+    if (!self.shouldShowVariantSelector) {
+         _productView.productViewFooter.extensionViewHeight.constant = 0;
+        _productView.productViewFooter.extensionViewTop.constant = 0;
+    }
+    
     if (self.cart) {
         [_productView.productViewFooter.actionButton setTitle:NSLocalizedString(@"Add to Cart", nil) forState:UIControlStateNormal];
         [_productView.productViewFooter.actionButton addTarget:self action:@selector(addSelectedVariantToCart) forControlEvents:UIControlEventTouchUpInside];
@@ -380,7 +399,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	NSInteger rows = 0;
 	if (self.product) {
 		rows += 1; // product title and price
-		rows += self.shouldShowVariantSelector;
 		rows += self.shouldShowDescription;
 	}
 	return rows;
@@ -395,13 +413,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 		[cell setProductVariant:self.selectedProductVariant withCurrencyFormatter:self.currencyFormatter];
 		self.headerCell = cell;
 		theCell = cell;
-	} else if (indexPath.row == 1 && self.shouldShowVariantSelector) {
-		ProductVariantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"variantCell"];
-		[cell setOptionsForProductVariant:self.selectedProductVariant];
-		cell.accessoryType = self.shouldEnableVariantSelection ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-		self.variantCell = cell;
-		theCell = cell;
-	} else if ((indexPath.row == 2 && self.shouldShowDescription) || (indexPath.row == 1 && self.shouldShowVariantSelector == NO && self.shouldShowDescription)) {
+	} else if ((indexPath.row == 1 && self.shouldShowDescription) || (indexPath.row == 1 && self.shouldShowVariantSelector == NO && self.shouldShowDescription)) {
 		ProductDescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"descriptionCell"];
 		cell.descriptionHTML = self.product.htmlDescription;
 		cell.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth(self.productView.tableView.bounds), 0, 0);
@@ -413,15 +425,18 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.row == 1 && self.shouldEnableVariantSelection) {
-		[self.productView.tableView deselectRowAtIndexPath:indexPath animated:YES];
-		VariantSelectionViewController *optionSelectionViewController = [[VariantSelectionViewController alloc] initWithProduct:self.product];
-		optionSelectionViewController.selectedProductVariant = self.selectedProductVariant;
-		optionSelectionViewController.delegate = self;
-		optionSelectionViewController.currencyFormatter = self.currencyFormatter;
-		OptionSelectionNavigationController *optionSelectionNavigationController = [[OptionSelectionNavigationController alloc] initWithRootViewController:optionSelectionViewController];
-		[self presentViewController:optionSelectionNavigationController animated:YES completion:nil];
-	}
+    
+}
+
+#pragma mark - BUYVariantSelection
+
+- (void)openVariantSelector {
+    VariantSelectionViewController *optionSelectionViewController = [[VariantSelectionViewController alloc] initWithProduct:self.product];
+    optionSelectionViewController.selectedProductVariant = self.selectedProductVariant;
+    optionSelectionViewController.delegate = self;
+    optionSelectionViewController.currencyFormatter = self.currencyFormatter;
+    OptionSelectionNavigationController *optionSelectionNavigationController = [[OptionSelectionNavigationController alloc] initWithRootViewController:optionSelectionViewController];
+    [self presentViewController:optionSelectionNavigationController animated:YES completion:nil];
 }
 
 #pragma mark - BUYVariantSelectionViewControllerDelegate
@@ -449,7 +464,23 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	_selectedProductVariant = selectedProductVariant;
 	if (self.headerCell) {
 		[self.headerCell setProductVariant:selectedProductVariant withCurrencyFormatter:self.currencyFormatter];
-		[self.variantCell setOptionsForProductVariant:self.selectedProductVariant];
+        for (ProductVariantView *variantView in _productView.productViewFooter.extensionView.subviews) {
+            if ([variantView isKindOfClass:[ProductVariantView class]]) {
+                for (UIGestureRecognizer *recognizer in _productView.productViewFooter.extensionView.gestureRecognizers) {
+                    [_productView.productViewFooter.extensionView removeGestureRecognizer:recognizer];
+                }
+                if (self.shouldEnableVariantSelection) {
+                    [variantView setOptionsForProductVariant:self.selectedProductVariant hideDisclosureIndicator:NO];
+                    UITapGestureRecognizer *variantSelectorFingerTap =
+                    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                            action:@selector(openVariantSelector)];
+                    [_productView.productViewFooter.extensionView addGestureRecognizer:variantSelectorFingerTap];
+                }
+                if (!self.shouldEnableVariantSelection) {
+                    [variantView setOptionsForProductVariant:self.selectedProductVariant hideDisclosureIndicator:YES];
+                }
+            }
+        }
 	}
 	if (self.productView.productViewHeader.collectionView) {
 		[self.productView.productViewHeader setImageForSelectedVariant:_selectedProductVariant withImages:[self.product.images array]];
