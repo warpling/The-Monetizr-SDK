@@ -58,13 +58,13 @@ CGFloat const bWidth = 10.0f;
 
         NSDictionary *views = NSDictionaryOfVariableBindings(_optionView1, _optionView2, _optionView3, _disclosureIndicatorImageView);
         
-        NSDictionary *metricsDictionary = @{ @"paddingExtraLarge" : @(kBuyPaddingExtraLarge), @"paddingSmall" : @(kBuyPaddingSmall), @"buttonWidth" : @(bWidth), @"paddingNone" : @(kBuyPaddingNone) };
+        NSDictionary *metricsDictionary = @{ @"paddingExtraLarge" : @(kBuyPaddingExtraLarge), @"paddingSmall" : @(kBuyPaddingSmall), @"buttonWidth" : @(bWidth), @"paddingNone" : @(kBuyPaddingNone), @"paddingVerySmall" :@(kBuyPaddingVerySmall) };
         
         self.constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_optionView1]-(paddingExtraLarge)-[_optionView2]-(paddingExtraLarge)-[_optionView3]-(>=paddingSmall)-[_disclosureIndicatorImageView(buttonWidth)]-|" options:0 metrics:metricsDictionary views:views];
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_optionView1]-|" options:0 metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_optionView2]-|" options:0 metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_optionView3]-|" options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(paddingSmall)-[_optionView1]-|" options:0 metrics:metricsDictionary views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(paddingSmall)-[_optionView2]-|" options:0 metrics:metricsDictionary views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(paddingSmall)-[_optionView3]-|" options:0 metrics:metricsDictionary views:views]];
         
         [self addConstraint: [NSLayoutConstraint constraintWithItem:_disclosureIndicatorImageView
                                                                       attribute:NSLayoutAttributeCenterY

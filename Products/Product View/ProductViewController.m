@@ -352,7 +352,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
     // Setup variant view
     
     if (self.shouldShowVariantSelector) {
-        ProductVariantView *variantView = [[ProductVariantView alloc] initWithFrame:CGRectMake(0, 0, self.preferredContentSize.width-20, 50)];
+        ProductVariantView *variantView = [[ProductVariantView alloc] initWithFrame:CGRectMake(0, 0, self.preferredContentSize.width, 55)];
         if (self.shouldEnableVariantSelection) {
             [variantView setOptionsForProductVariant:self.selectedProductVariant hideDisclosureIndicator:NO];
             UITapGestureRecognizer *variantSelectorFingerTap =
@@ -367,7 +367,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
     }
     if (!self.shouldShowVariantSelector) {
          _productView.productViewFooter.extensionViewHeight.constant = 0;
-        _productView.productViewFooter.extensionViewTop.constant = 0;
     }
     
     if (self.cart) {

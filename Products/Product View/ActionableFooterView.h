@@ -52,6 +52,5 @@
 @property (nonatomic) UIColor *separatorColor UI_APPEARANCE_SELECTOR;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *extensionViewHeight;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *extensionViewTop;
 
 @end
