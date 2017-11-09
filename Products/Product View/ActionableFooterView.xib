@@ -23,11 +23,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjm-5z-kCD" userLabel="paymentContainer">
-                                <rect key="frame" x="165" y="63" width="145" height="44"/>
+                                <rect key="frame" x="159" y="63" width="133" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoe-n5-0iT" customClass="CheckoutButton">
-                                <rect key="frame" x="10" y="63" width="145" height="44"/>
+                                <rect key="frame" x="16" y="63" width="133" height="44"/>
                                 <color key="backgroundColor" red="0.079406969249248505" green="0.6425163745880127" blue="0.99822807312011719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Yod-FN-PBJ"/>
@@ -39,20 +39,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbM-Nc-TSH">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="5eq-CM-bjl"/>
+                                    <constraint firstAttribute="height" constant="55" id="At5-jP-C6V"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="top" secondItem="tOf-FE-2kG" secondAttribute="top" id="1Or-vd-kbQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="155" id="4jE-2h-gr6"/>
+                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leadingMargin" id="ACp-Cb-o3A"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="height" secondItem="Eoe-n5-0iT" secondAttribute="height" id="DoE-w1-naR"/>
                             <constraint firstItem="QbM-Nc-TSH" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" id="Q7m-41-SnI"/>
-                            <constraint firstItem="jjm-5z-kCD" firstAttribute="leading" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="10" id="TrN-mK-JxT"/>
+                            <constraint firstItem="jjm-5z-kCD" firstAttribute="leading" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="10" id="UrY-kJ-C6C"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Eoe-n5-0iT" secondAttribute="bottom" id="WHF-0k-ScU"/>
-                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" constant="10" id="dZr-Hj-aFE"/>
+                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="top" secondItem="tOf-FE-2kG" secondAttribute="top" id="XRj-9p-R87"/>
+                            <constraint firstItem="jjm-5z-kCD" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" constant="8" id="eQ1-A4-xzn"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="width" secondItem="Eoe-n5-0iT" secondAttribute="width" id="fop-kv-C9D"/>
                             <constraint firstItem="jjm-5z-kCD" firstAttribute="centerY" secondItem="Eoe-n5-0iT" secondAttribute="centerY" id="g86-Vu-ZpD"/>
-                            <constraint firstAttribute="trailing" secondItem="jjm-5z-kCD" secondAttribute="trailing" constant="10" id="gAH-5J-cUr"/>
                             <constraint firstItem="Eoe-n5-0iT" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" constant="8" id="pwX-zC-1fR"/>
                             <constraint firstAttribute="trailing" secondItem="QbM-Nc-TSH" secondAttribute="trailing" id="yYy-IX-gUN"/>
                         </constraints>
@@ -60,7 +61,7 @@
                     <blurEffect style="extraLight"/>
                 </visualEffectView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="2he-LW-1Mz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9VD-ID-fkE"/>
                 <constraint firstItem="2he-LW-1Mz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EFC-N3-UwK"/>
@@ -69,14 +70,15 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <edgeInsets key="layoutMargins" top="5" left="10" bottom="10" right="10"/>
+            <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
             <connections>
                 <outlet property="actionButton" destination="Eoe-n5-0iT" id="slV-do-iC5"/>
+                <outlet property="applePayLeadingConstraint" destination="UrY-kJ-C6C" id="CBg-TA-i3I"/>
                 <outlet property="extensionView" destination="QbM-Nc-TSH" id="1rQ-Kd-AvH"/>
-                <outlet property="extensionViewHeight" destination="5eq-CM-bjl" id="LQN-Bq-2HW"/>
+                <outlet property="firstButtonTrailingConstraint" destination="4jE-2h-gr6" id="kTF-KV-LGT"/>
                 <outlet property="paymentButtonContainer" destination="jjm-5z-kCD" id="tgu-5h-QO3"/>
             </connections>
-            <point key="canvasLocation" x="149" y="518.5"/>
+            <point key="canvasLocation" x="142" y="533.5"/>
         </view>
     </objects>
 </document>
