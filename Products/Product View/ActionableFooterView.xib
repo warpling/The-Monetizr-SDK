@@ -13,72 +13,70 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ActionableFooterView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2he-LW-1Mz">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" id="tOf-FE-2kG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjm-5z-kCD" userLabel="paymentContainer">
-                                <rect key="frame" x="159" y="63" width="133" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoe-n5-0iT" customClass="CheckoutButton">
-                                <rect key="frame" x="16" y="63" width="133" height="44"/>
-                                <color key="backgroundColor" red="0.079406969249248505" green="0.6425163745880127" blue="0.99822807312011719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Yod-FN-PBJ"/>
-                                </constraints>
-                                <state key="normal" title="Add to Cart">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbM-Nc-TSH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="At5-jP-C6V"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="155" id="4jE-2h-gr6"/>
-                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leadingMargin" id="ACp-Cb-o3A"/>
-                            <constraint firstItem="jjm-5z-kCD" firstAttribute="height" secondItem="Eoe-n5-0iT" secondAttribute="height" id="DoE-w1-naR"/>
-                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="leading" secondItem="tOf-FE-2kG" secondAttribute="leading" id="Q7m-41-SnI"/>
-                            <constraint firstItem="jjm-5z-kCD" firstAttribute="leading" secondItem="Eoe-n5-0iT" secondAttribute="trailing" constant="10" id="UrY-kJ-C6C"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Eoe-n5-0iT" secondAttribute="bottom" id="WHF-0k-ScU"/>
-                            <constraint firstItem="QbM-Nc-TSH" firstAttribute="top" secondItem="tOf-FE-2kG" secondAttribute="top" id="XRj-9p-R87"/>
-                            <constraint firstItem="jjm-5z-kCD" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" constant="8" id="eQ1-A4-xzn"/>
-                            <constraint firstItem="jjm-5z-kCD" firstAttribute="width" secondItem="Eoe-n5-0iT" secondAttribute="width" id="fop-kv-C9D"/>
-                            <constraint firstItem="jjm-5z-kCD" firstAttribute="centerY" secondItem="Eoe-n5-0iT" secondAttribute="centerY" id="g86-Vu-ZpD"/>
-                            <constraint firstItem="Eoe-n5-0iT" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" constant="8" id="pwX-zC-1fR"/>
-                            <constraint firstAttribute="trailing" secondItem="QbM-Nc-TSH" secondAttribute="trailing" id="yYy-IX-gUN"/>
-                        </constraints>
-                    </view>
-                    <blurEffect style="extraLight"/>
-                </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Wp-4v-xgp">
+                    <rect key="frame" x="0.0" y="55" width="320" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoe-n5-0iT" customClass="CheckoutButton">
+                            <rect key="frame" x="8" y="8" width="147" height="44"/>
+                            <color key="backgroundColor" red="0.079406969249248505" green="0.6425163745880127" blue="0.99822807312011719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Yod-FN-PBJ"/>
+                            </constraints>
+                            <state key="normal" title="Add to Cart">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjm-5z-kCD" userLabel="paymentContainer">
+                            <rect key="frame" x="165" y="8" width="147" height="44"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="utu-nq-IhC"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="jjm-5z-kCD" firstAttribute="width" secondItem="Eoe-n5-0iT" secondAttribute="width" id="A5o-nY-Nnq"/>
+                        <constraint firstItem="Eoe-n5-0iT" firstAttribute="top" secondItem="8Wp-4v-xgp" secondAttribute="top" constant="8" id="H0l-fk-hk9"/>
+                        <constraint firstItem="Eoe-n5-0iT" firstAttribute="leading" secondItem="8Wp-4v-xgp" secondAttribute="leading" constant="8" id="KpN-bu-6HO"/>
+                        <constraint firstItem="Eoe-n5-0iT" firstAttribute="bottom" secondItem="8Wp-4v-xgp" secondAttribute="bottomMargin" id="MTQ-dH-8rs"/>
+                        <constraint firstItem="jjm-5z-kCD" firstAttribute="leading" secondItem="Eoe-n5-0iT" secondAttribute="trailing" priority="999" constant="10" id="YXy-yw-95W"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="iBR-l9-VPY"/>
+                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Eoe-n5-0iT" secondAttribute="trailing" priority="750" constant="8" id="lF8-4b-uI6"/>
+                        <constraint firstItem="jjm-5z-kCD" firstAttribute="centerY" secondItem="Eoe-n5-0iT" secondAttribute="centerY" id="tG8-J8-4De"/>
+                        <constraint firstAttribute="trailing" secondItem="jjm-5z-kCD" secondAttribute="trailing" constant="8" id="zh3-Gh-H6h"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbM-Nc-TSH">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="At5-jP-C6V"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="2he-LW-1Mz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9VD-ID-fkE"/>
-                <constraint firstItem="2he-LW-1Mz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EFC-N3-UwK"/>
-                <constraint firstItem="2he-LW-1Mz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nzn-ri-Fq0"/>
-                <constraint firstItem="2he-LW-1Mz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xUR-8Z-blk"/>
+                <constraint firstItem="QbM-Nc-TSH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3Bz-8X-ghL"/>
+                <constraint firstAttribute="trailing" secondItem="QbM-Nc-TSH" secondAttribute="trailing" id="Cpf-3B-Ua5"/>
+                <constraint firstItem="8Wp-4v-xgp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K9O-Da-B6C"/>
+                <constraint firstAttribute="trailing" secondItem="8Wp-4v-xgp" secondAttribute="trailing" id="epQ-Eg-qwM"/>
+                <constraint firstItem="8Wp-4v-xgp" firstAttribute="top" secondItem="QbM-Nc-TSH" secondAttribute="bottom" id="hhB-BD-E9A"/>
+                <constraint firstItem="QbM-Nc-TSH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oRe-X8-e0X"/>
+                <constraint firstAttribute="bottom" secondItem="8Wp-4v-xgp" secondAttribute="bottom" id="z1h-ne-bhg"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
             <connections>
                 <outlet property="actionButton" destination="Eoe-n5-0iT" id="slV-do-iC5"/>
-                <outlet property="applePayLeadingConstraint" destination="UrY-kJ-C6C" id="CBg-TA-i3I"/>
                 <outlet property="extensionView" destination="QbM-Nc-TSH" id="1rQ-Kd-AvH"/>
-                <outlet property="firstButtonTrailingConstraint" destination="4jE-2h-gr6" id="kTF-KV-LGT"/>
+                <outlet property="firstButtonToSecondButtonConstraint" destination="YXy-yw-95W" id="H21-9N-0LV"/>
+                <outlet property="firstButtonToSuperviewConstraint" destination="lF8-4b-uI6" id="jcr-HC-Xg9"/>
                 <outlet property="paymentButtonContainer" destination="jjm-5z-kCD" id="tgu-5h-QO3"/>
             </connections>
-            <point key="canvasLocation" x="142" y="533.5"/>
+            <point key="canvasLocation" x="142" y="534.5"/>
         </view>
     </objects>
 </document>

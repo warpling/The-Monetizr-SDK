@@ -111,14 +111,15 @@
     [[ProductHeaderCell appearance] setBackgroundColor:contentBackgroundColor];
     [[ProductDescriptionCell appearance] setDescriptionTextColor:contentTextColor];
     [[ProductDescriptionCell appearance] setBackgroundColor:contentBackgroundColor];
-    [[ProductVariantView appearance] setBackgroundColor:contentBackgroundColor];
-    [[VariantOptionView appearance] setBackgroundColor:contentBackgroundColor];
+    [[ProductVariantView appearance] setBackgroundColor: [UIColor clearColor]];
+    [[VariantOptionView appearance] setBackgroundColor:[UIColor clearColor]];
     [[OptionValueCell appearance] setTintColor:primaryColor];
     [[OptionValueCell appearance] setBackgroundColor:contentBackgroundColor];
     [[OptionValueCell appearance] setSelectedBackgroundViewBackgroundColor:contentBackgroundSelectedColor];
     [[HeaderOverlayView appearance] setOverlayBackgroundColor:contentBackgroundColor];
     [[OptionBreadCrumbsView appearance] setBackgroundColor:secondaryLightColor];
     [[OptionBreadCrumbsView appearance] setVariantOptionTextColor:BUY_RGB(140, 140, 140)];
+    
 }
 
 @end

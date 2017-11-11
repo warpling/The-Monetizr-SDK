@@ -33,6 +33,7 @@
 #import "ImageKit.h"
 #import "Theme+Additions.h"
 #import "VariantOptionView.h"
+#import "VisualEffectView.h"
 
 @interface ProductVariantView : UIView
 

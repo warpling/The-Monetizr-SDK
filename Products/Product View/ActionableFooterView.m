@@ -30,8 +30,8 @@
 @property (nonatomic) BOOL applePayAvailable;
 @property (nonatomic) BOOL applePayRequiresSetup;
 
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *applePayLeadingConstraint;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *firstButtonTrailingConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *firstButtonToSecondButtonConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *firstButtonToSuperviewConstraint;
 @property (strong, nonatomic) IBOutlet CheckoutButton *actionButton;
 @property (strong, nonatomic) IBOutlet UIView *paymentButtonContainer;
 @property (strong, nonatomic) IBOutlet UIView *extensionView;
@@ -58,10 +58,10 @@
 
 - (void)setApplePayAvailable:(BOOL)applePayAvailable requiresSetup:(BOOL)requiresSetup
 {
-	_applePayAvailable = applePayAvailable;
-	_applePayRequiresSetup = requiresSetup;
+    _applePayAvailable = applePayAvailable;
+    _applePayRequiresSetup = requiresSetup;
 	
-	self.paymentButtonContainer.hidden = !applePayAvailable;
+	self.paymentButtonContainer.hidden = !_applePayAvailable;
 	PaymentButtonType type = self.applePayRequiresSetup ? PaymentButtonTypeSetup : PaymentButtonTypeBuy;
 	
 	if (!self.paymentButton) {
@@ -84,7 +84,6 @@
 - (void)setLayoutMargins:(UIEdgeInsets)layoutMargins
 {
 	[super setLayoutMargins:layoutMargins];
-	self.applePayLeadingConstraint.constant = self.layoutMargins.left;
 }
 
 - (void)layoutSubviews
@@ -103,10 +102,15 @@
 - (void)updateConstraints
 {
 	if (self.applePayAvailable) {
-		CGFloat trailingConstant = (CGRectGetWidth(self.bounds) - self.layoutMargins.right) * 0.5f;
-		self.firstButtonTrailingConstraint.constant = trailingConstant;
+        _firstButtonToSuperviewConstraint.priority = 750;
+        _firstButtonToSuperviewConstraint.active = YES;
+        _firstButtonToSecondButtonConstraint.priority = 999;
+        _firstButtonToSecondButtonConstraint.active = YES;
 	} else {
-		self.firstButtonTrailingConstraint.constant = 0.0f;
+        _firstButtonToSuperviewConstraint.priority = 999;
+        _firstButtonToSuperviewConstraint.active = YES;
+        _firstButtonToSecondButtonConstraint.priority = 750;
+        _firstButtonToSecondButtonConstraint.active = YES;
 	}
 	[super updateConstraints];
 }

@@ -35,6 +35,11 @@ CGFloat const bWidth = 10.0f;
 {
     self = [super initWithFrame:rect];
     if (self) {
+              
+        VisualEffectView *visualEffectView = [VisualEffectView new];
+        visualEffectView.frame = self.bounds;
+        [self addSubview:visualEffectView];
+        
         self.layoutMargins = UIEdgeInsetsMake(kBuyPaddingVerySmall, self.layoutMargins.left, kBuyPaddingVerySmall, self.layoutMargins.right);
         
         _optionView1 = [[VariantOptionView alloc] init];
