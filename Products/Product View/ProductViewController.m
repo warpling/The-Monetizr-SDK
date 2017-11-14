@@ -191,7 +191,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 - (void)setupNavigationBarAppearance
 {
 	if (self.navigationBar == nil && _productView && self.presentingViewController != nil) {
-		[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:YES duration:0];
 		for (UIView *view in [self.navigationController.navigationBar subviews]) {
 			if (CGRectGetHeight(view.bounds) >= 44) {
 				// Get a reference to the UINavigationBar
@@ -323,8 +322,7 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 	if (self.theme.showsProductShareButton && self.URLForSharing && (!self.navigationItem.rightBarButtonItems || self.navigationItem.rightBarButtonItems.count < 1)) {
 		UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLink)];
         rightButton.accessibilityValue = NSLocalizedString(@"share", @"VoiceOver value for share button");
-		NSArray *rightButtons = [@[rightButton] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
-		self.navigationItem.rightBarButtonItems = rightButtons;
+        self.navigationItem.rightBarButtonItem = rightButton;
 	}
 }
 
@@ -504,7 +502,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 			if (self.navigationBar) {
 				CGFloat duration = 0.3f;
 				if (self.navigationBar.alpha != 1 && [self navigationBarThresholdReached] == YES) {
-					[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:YES duration:duration];
 					[UIView animateWithDuration:duration
 										  delay:0
 										options:(UIViewAnimationOptionCurveLinear | UIViewKeyframeAnimationOptionBeginFromCurrentState)
@@ -516,7 +513,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 									 completion:NULL];
 				} else if (self.navigationBar.alpha != 0 && [self navigationBarThresholdReached] == NO)  {
 					duration = 0.2f;
-					[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:YES duration:duration];
 					[UIView animateWithDuration:duration
 										  delay:0
 										options:(UIViewAnimationOptionCurveLinear | UIViewKeyframeAnimationOptionBeginFromCurrentState)
@@ -530,7 +526,6 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 				[self.productView.productViewHeader.productViewHeaderOverlay scrollViewDidScroll:scrollView withNavigationBarHeight:CGRectGetHeight(self.navigationBar.bounds)];
 			}
 		} else if (self.productView.productViewHeader == nil && self.navigationBar && self.navigationBar.alpha == 0) {
-			[(ProductViewNavigationController*)self.navigationController updateCloseButtonImageWithTintColor:YES duration:0];
 			self.navigationBar.alpha = 1;
 			self.navigationBarTitle.alpha = 1;
 			CGFloat topInset = 0;

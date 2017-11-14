@@ -34,39 +34,11 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
 	self = [super initWithRootViewController:rootViewController];
-	
-	UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[closeButton addTarget:self action:@selector(dismissPopover) forControlEvents:UIControlEventTouchUpInside];
-	closeButton.frame = CGRectMake(0, 0, 44, 44);
-    closeButton.accessibilityValue = NSLocalizedString(@"close", @"VoiceOver label for close button");
-
-	UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
-	self.topViewController.navigationItem.leftBarButtonItem = barButtonItem;
-	if ([[UINavigationBar class] respondsToSelector:@selector(appearanceWhenContainedInInstancesOfClasses:)]) {
-		[[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[ProductViewNavigationController class]]] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-	} else {
-		[[UINavigationBar appearanceWhenContainedIn:[ProductViewNavigationController class], nil] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-	}
-	
-	[self updateCloseButtonImageWithTintColor:YES duration:0];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissPopover)];
+    leftButton.accessibilityValue = NSLocalizedString(@"close", @"VoiceOver label for close button");
+    self.topViewController.navigationItem.leftBarButtonItem = leftButton;
 	
 	return self;
-}
-
-- (void)updateCloseButtonImageWithTintColor:(BOOL)tintColor duration:(CGFloat)duration
-{
-	UIButton *button = (UIButton*)self.topViewController.navigationItem.leftBarButtonItem.customView;
-    UIImage *newButtonImage = [ImageKit imageOfProductViewCloseImageWithFrame:CGRectMake(0, 0, 22, 22) color:[UIColor whiteColor] hasShadow:tintColor == NO];
-	if (tintColor) {
-		newButtonImage = [newButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-	}
-	[UIView transitionWithView:button.imageView
-					  duration:duration
-					   options:(UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionBeginFromCurrentState)
-					animations:^{
-						[button setImage:newButtonImage forState:UIControlStateNormal];
-					}
-					completion:NULL];
 }
 
 - (void)dismissPopover

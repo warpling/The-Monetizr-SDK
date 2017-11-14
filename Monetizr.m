@@ -82,6 +82,7 @@
     
     // theme.style = ThemeStyleDark;
     // theme.hidesStatusBar = YES;
+    // theme.showsProductShareButton = YES;
     
     theme.showsProductImageBackground = YES;
 

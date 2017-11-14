@@ -47,15 +47,6 @@
 @interface ProductViewNavigationController : NavigationController
 
 /**
- *  The close button has two styles; white or tint color. This methods updates the button image with the preferred style.
- *  The white button has a drop shadow.
- *
- *  @param tintColor Flag that determines the style and color of the button
- *  @param duration  The duration to use for transitioning between the two button styles
- */
-- (void)updateCloseButtonImageWithTintColor:(BOOL)tintColor duration:(CGFloat)duration;
-
-/**
  *  The SmoothNavigationControllerDelegate
  */
 @property (nonatomic, weak) id <ProductViewNavigationControllerDelegate> navigationDelegate;
