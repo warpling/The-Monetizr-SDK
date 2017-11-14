@@ -37,7 +37,7 @@
 	
 	UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[closeButton addTarget:self action:@selector(dismissPopover) forControlEvents:UIControlEventTouchUpInside];
-	closeButton.frame = CGRectMake(0, 0, 22, 22);
+	closeButton.frame = CGRectMake(0, 0, 44, 44);
     closeButton.accessibilityValue = NSLocalizedString(@"close", @"VoiceOver label for close button");
 
 	UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
@@ -56,7 +56,7 @@
 - (void)updateCloseButtonImageWithTintColor:(BOOL)tintColor duration:(CGFloat)duration
 {
 	UIButton *button = (UIButton*)self.topViewController.navigationItem.leftBarButtonItem.customView;
-	UIImage *newButtonImage = [ImageKit imageOfProductViewCloseImageWithFrame:button.bounds color:[UIColor whiteColor] hasShadow:tintColor == NO];
+    UIImage *newButtonImage = [ImageKit imageOfProductViewCloseImageWithFrame:CGRectMake(0, 0, 22, 22) color:[UIColor whiteColor] hasShadow:tintColor == NO];
 	if (tintColor) {
 		newButtonImage = [newButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 	}
