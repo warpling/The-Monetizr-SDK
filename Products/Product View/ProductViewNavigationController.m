@@ -35,7 +35,7 @@
 {
 	self = [super initWithRootViewController:rootViewController];
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissPopover)];
-    leftButton.accessibilityValue = NSLocalizedString(@"close", @"VoiceOver label for close button");
+    leftButton.accessibilityLabel = NSLocalizedString(@"close", @"VoiceOver label for close button");
     self.topViewController.navigationItem.leftBarButtonItem = leftButton;
 	
 	return self;
