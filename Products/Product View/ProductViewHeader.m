@@ -198,7 +198,7 @@
 	ProductImageCell *cell = (ProductImageCell*)[self.collectionView cellForItemAtIndexPath:visibleIndexPath];
 	if (cell) {
 		[cell setContentOffset:scrollView.contentOffset];
-		return cell.productImageViewConstraintHeight.constant;
+        return cell.productImageViewConstraintHeight.constant;
 	} else {
 		cell = [self.collectionView.visibleCells firstObject];
 		return cell.productImageViewConstraintHeight.constant;

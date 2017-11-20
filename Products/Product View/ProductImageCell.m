@@ -80,7 +80,8 @@
 	self.productImageViewConstraintBottom.constant = offset.y >= 0 ? offset.y / 2 : 0;
 	self.productImageViewConstraintHeight.constant = offset.y >= 0 ? CGRectGetHeight(self.bounds) : CGRectGetHeight(self.bounds) + -offset.y;
 	
-	self.productImageView.contentMode = UIViewContentModeScaleAspectFit;
+	self.productImageView.contentMode = UIViewContentModeScaleAspectFill;
+    /**
 	if (self.productImageView.image && [self.productImageView isPortraitOrSquare]) {
 		CGFloat imageRatio = self.productImageView.image.size.height / self.productImageView.image.size.width;
 		CGFloat imageViewRatio = CGRectGetHeight(self.productImageView.bounds) / CGRectGetWidth(self.productImageView.bounds);
@@ -88,6 +89,7 @@
 			self.productImageView.contentMode = UIViewContentModeScaleAspectFill;
 		}
 	}
+     **/
 }
 
 - (void)prepareForReuse
