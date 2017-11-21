@@ -496,6 +496,13 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    // Dismiss if needed
+    CGPoint offset = scrollView.contentOffset;
+    if (offset.y < -self.view.frame.size.height/3) {
+        // Dismiss
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    // Do sizing
 	if ([scrollView isKindOfClass:[UITableView class]]) {
 		if (self.productView.productViewHeader) {
 			[self.productView scrollViewDidScroll:scrollView];
