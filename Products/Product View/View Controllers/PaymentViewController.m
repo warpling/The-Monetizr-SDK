@@ -154,16 +154,16 @@
 
 - (void)paymentProviderWillStartCheckout:(id<BUYPaymentProvider>)provider
 {
-	if ([self.delegate respondsToSelector:@selector(controllerWillCheckoutViaWeb:)]) {
-		[self.delegate controllerWillCheckoutViaWeb:self];
-	}
+    if ([self.delegate respondsToSelector:@selector(controllerWillCheckoutViaWeb:)]) {
+        [self.delegate controllerWillCheckoutViaWeb:self];
+    }
 }
 
 - (void)paymentProviderDidDismissCheckout:(id<BUYPaymentProvider>)provider
 {
-	if ([self.delegate respondsToSelector:@selector(controller:didDismissWebCheckout:)]) {
-		[self.delegate controller:self didDismissWebCheckout:self.checkout];
-	}
+    if ([self.delegate respondsToSelector:@selector(controller:didDismissWebCheckout:)]) {
+        [self.delegate controller:self didDismissWebCheckout:self.checkout];
+    }
 }
 
 - (void)paymentProvider:(id<BUYPaymentProvider>)provider didFailCheckoutWithError:(NSError *)error

@@ -705,27 +705,21 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 
 - (void)willStartCheckout
 {
-	[_productView.productViewFooter.actionButton showActivityIndicator:NO];
+    [_productView.productViewFooter.actionButton showActivityIndicator:NO];
 
-	if ([self.delegate respondsToSelector:@selector(controllerWillCheckoutViaWeb:)]) {
-		[self.delegate controllerWillCheckoutViaWeb:self];
-	}
+    if ([self.delegate respondsToSelector:@selector(controllerWillCheckoutViaWeb:)]) {
+        [self.delegate controllerWillCheckoutViaWeb:self];
+    }
 }
 
 - (void)didFailCheckoutWithError:(NSError *)error
 {
-	[_productView.productViewFooter.actionButton showActivityIndicator:NO];
+    [_productView.productViewFooter.actionButton showActivityIndicator:NO];
 	[self.productView showErrorWithMessage:@"Could not checkout at this time"];
 
 	if ([self.delegate respondsToSelector:@selector(controller:failedToCreateCheckout:)]) {
 		[self.delegate controller:self failedToCreateCheckout:error];
 	}
 }
-
-#pragma mark - Accessibility
-
-//- (BOOL) accessibilityPerformEscape {
-//    self
-//}
 
 @end
