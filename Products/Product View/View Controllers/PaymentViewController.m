@@ -200,7 +200,7 @@
 	return nil;
 }
 
-#pragma mark
+#pragma mark - Alerts
 
 - (void) showAlertWithTitle: (NSString *) title andMessage: (NSString *)message {
     UIAlertController * alert = [UIAlertController

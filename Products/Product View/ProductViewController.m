@@ -703,23 +703,51 @@ CGFloat const BUYMaxProductViewHeight = 640.0;
 
 #pragma mark - Payment delegate methods
 
-- (void)willStartCheckout
-{
-    [_productView.productViewFooter.actionButton showActivityIndicator:NO];
+//- (void)willStartCheckout
+//{
+//    [_productView.productViewFooter.actionButton showActivityIndicator:NO];
+//
+//    if ([self.delegate respondsToSelector:@selector(controllerWillCheckoutViaWeb:)]) {
+//        [self.delegate controllerWillCheckoutViaWeb:self];
+//    }
+//}
+//
+//- (void)didFailCheckoutWithError:(NSError *)error
+//{
+//    [_productView.productViewFooter.actionButton showActivityIndicator:NO];
+//    [self.productView showErrorWithMessage:@"Could not checkout at this time"];
+//
+//    if ([self.delegate respondsToSelector:@selector(controller:failedToCreateCheckout:)]) {
+//        [self.delegate controller:self failedToCreateCheckout:error];
+//    }
+//}
 
-    if ([self.delegate respondsToSelector:@selector(controllerWillCheckoutViaWeb:)]) {
-        [self.delegate controllerWillCheckoutViaWeb:self];
+- (void) startWebCheckout:(BUYCheckout *)checkout {
+    [super startWebCheckout:checkout];
+    [self.purchaseTrackingDelegate merchCheckoutStarted];
+    if ([self.purchaseTrackingDelegate respondsToSelector:@selector(merchCheckoutStarted)]) {
+        [self.purchaseTrackingDelegate merchCheckoutStarted];
     }
 }
 
-- (void)didFailCheckoutWithError:(NSError *)error
-{
-    [_productView.productViewFooter.actionButton showActivityIndicator:NO];
-	[self.productView showErrorWithMessage:@"Could not checkout at this time"];
+- (void) startApplePayCheckout:(BUYCheckout *)checkout {
+    [super startApplePayCheckout:checkout];
+    if ([self.purchaseTrackingDelegate respondsToSelector:@selector(merchCheckoutStarted)]) {
+        [self.purchaseTrackingDelegate merchCheckoutStarted];
+    }
+}
 
-	if ([self.delegate respondsToSelector:@selector(controller:failedToCreateCheckout:)]) {
-		[self.delegate controller:self failedToCreateCheckout:error];
-	}
+- (void)checkoutCompleted:(BUYCheckout *)checkout status:(BUYStatus)status {
+    [super checkoutCompleted:checkout status:status];
+    if (status == BUYStatusComplete) {
+        if ([self.purchaseTrackingDelegate respondsToSelector:@selector(merchCheckoutSucceeded)]) {
+            [self.purchaseTrackingDelegate merchCheckoutSucceeded];
+        }
+    } else {
+        if ([self.purchaseTrackingDelegate respondsToSelector:@selector(merchCheckoutFailed)]) {
+            [self.purchaseTrackingDelegate merchCheckoutFailed];
+        }
+    }
 }
 
 @end

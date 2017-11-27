@@ -79,11 +79,6 @@
     
     // Configure theme
     Theme *theme = [Theme new];
-    
-    // theme.style = ThemeStyleDark;
-    // theme.hidesStatusBar = YES;
-    // theme.showsProductShareButton = YES;
-    
     theme.showsProductImageBackground = YES;
 
     // Determine product variant to choose by default

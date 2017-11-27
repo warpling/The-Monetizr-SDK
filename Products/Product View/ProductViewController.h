@@ -89,6 +89,19 @@
  */
 - (void)presentPortraitInViewController:(UIViewController *)controller;
 
+
+#pragma mark - Ryan's additions
+
+/**
+ *  If this product was located via a tag, it'll be set here
+ */
+@property (nonatomic, weak) NSString *productTag;
+
+/**
+ *  Ryan's personal shoehorn implementation of detailed analytics tracking
+ */
+@property (nonatomic, weak) NSObject<BBPurchaseTracking> *purchaseTrackingDelegate;
+
 @end
 
 
