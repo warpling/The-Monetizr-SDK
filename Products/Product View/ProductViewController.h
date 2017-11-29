@@ -100,7 +100,7 @@
 /**
  *  Ryan's personal shoehorn implementation of detailed analytics tracking
  */
-@property (nonatomic, weak) NSObject<BBPurchaseTracking> *purchaseTrackingDelegate;
+@property (nonatomic, weak) NSObject<BBPurchaseTrackingDelegate> *purchaseTrackingDelegate;
 
 @end
 
